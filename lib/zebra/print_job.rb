@@ -15,6 +15,7 @@ module Zebra
     end
 
     def print(label)
+      label.persist! unless label.persisted?
       Cups::PrintJob.new(label.path, @printer).print
     end
 

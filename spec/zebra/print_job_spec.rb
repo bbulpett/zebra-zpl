@@ -16,7 +16,7 @@ describe Zebra::PrintJob do
   end
 
   describe "#print" do
-    let(:label) { stub :path => "/foo/bar" }
+    let(:label) { stub :path => "/foo/bar", :persisted? => true }
     let(:cups_job) { stub :print => true }
 
     subject(:print_job) { described_class.new "Zebra" }
@@ -31,6 +31,15 @@ describe Zebra::PrintJob do
     it "prints the label" do
       cups_job.should_receive(:print)
       print_job.print label
+    end
+
+    context "when the label is not persisted" do
+      before { label.stub :persisted? => false }
+
+      it "persists the label" do
+        label.should_receive(:persist!)
+        print_job.print label
+      end
     end
   end
 end
