@@ -56,8 +56,8 @@ describe Zebra::Epl::Label do
     let(:io) { "" }
 
     it "dumps its contents to the received IO" do
-      label << stub(:to_s => "foobar")
-      label << stub(:to_s => "blabla")
+      label << stub(:to_epl => "foobar")
+      label << stub(:to_epl => "blabla")
       label.width          = 100
       label.length_and_gap = [200, 24]
       label.print_speed    = 3
@@ -86,6 +86,30 @@ describe Zebra::Epl::Label do
       expect {
         label.dump_contents(io)
       }.to raise_error(Zebra::Epl::Label::PrintSpeedNotInformedError)
+    end
+  end
+
+  describe "#persist" do
+    let(:tempfile) { stub.as_null_object }
+    let(:label)    { described_class.new :print_speed => 2 }
+
+    before do
+      Tempfile.stub :new => tempfile
+      label << stub(:to_epl => "foobar")
+    end
+
+    it "creates a tempfile" do
+      Tempfile.should_receive(:new).with("zebra_label").and_return(tempfile)
+      label.persist
+    end
+
+    it "returns the tempfile" do
+      label.persist.should == tempfile
+    end
+
+    it "dumps its contents to the tempfile" do
+      tempfile.should_receive(:rewind)
+      label.persist
     end
   end
 end

@@ -16,30 +16,27 @@ describe Zebra::PrintJob do
   end
 
   describe "#print" do
-    let(:label) { stub :path => "/foo/bar", :persisted? => true }
+    let(:label) { stub :persist => tempfile }
     let(:cups_job) { stub :print => true }
+    let(:tempfile) { stub(:path => "/foo/bar").as_null_object }
 
     subject(:print_job) { described_class.new "Zebra" }
 
-    before { Cups::PrintJob.stub(:new).and_return(cups_job) }
+    before { print_job.stub(:` => true) }
 
     it "creates a cups print job with the correct arguments" do
-      Cups::PrintJob.should_receive(:new).with("/foo/bar", "Zebra").and_return(cups_job)
       print_job.print label
     end
 
     it "prints the label" do
-      cups_job.should_receive(:print)
+      print_job.should_receive(:`).with("lpr -P Zebra -o raw /foo/bar")
       print_job.print label
     end
 
-    context "when the label is not persisted" do
-      before { label.stub :persisted? => false }
-
-      it "persists the label" do
-        label.should_receive(:persist!)
-        print_job.print label
-      end
+    it "unlinks the file" do
+      tempfile.should_receive(:close)
+      tempfile.should_receive(:unlink)
+      print_job.print label
     end
   end
 end

@@ -15,8 +15,14 @@ module Zebra
     end
 
     def print(label)
-      label.persist! unless label.persisted?
-      Cups::PrintJob.new(label.path, @printer).print
+      tempfile = label.persist
+
+      begin
+        `lpr -P #{@printer} -o raw #{tempfile.path}`
+      ensure
+        tempfile.close
+        tempfile.unlink
+      end
     end
 
     private

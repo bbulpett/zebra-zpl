@@ -1,4 +1,5 @@
 require "cups"
+require "tempfile"
 require "zebra/epl/version"
 require "zebra/epl/rotation"
 require "zebra/epl/multipliers"

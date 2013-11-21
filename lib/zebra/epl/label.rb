@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 module Zebra
   module Epl
     class Label
@@ -52,10 +53,17 @@ module Zebra
         io << "N\n"
 
         elements.each do |element|
-          io << element.to_s << "\n"
+          io << element.to_epl << "\n"
         end
 
         io << "P0\n"
+      end
+
+      def persist
+        tempfile = Tempfile.new "zebra_label"
+        dump_contents tempfile
+        tempfile.rewind
+        tempfile
       end
 
       private
