@@ -29,10 +29,14 @@ module Zebra
 
       private
 
+      def has_data?
+        true
+      end
+
       def check_attributes
         raise MissingAttributeError.new("the X value is not given") unless @x
         raise MissingAttributeError.new("the Y value is not given") unless @y
-        raise MissingAttributeError.new("the data to be printed is not given") unless @data
+        raise MissingAttributeError.new("the data to be printed is not given") unless @data || !has_data?
       end
     end
   end
