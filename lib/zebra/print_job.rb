@@ -18,7 +18,7 @@ module Zebra
       tempfile = label.persist
 
       begin
-        `lpr -P #{@printer} -o raw #{tempfile.path}`
+        send_to_printer tempfile.path
       ensure
         tempfile.close
         tempfile.unlink
@@ -30,6 +30,14 @@ module Zebra
     def check_existent_printers(printer)
       existent_printers = Cups.show_destinations
       raise UnknownPrinter.new(printer) unless existent_printers.include?(printer)
+    end
+
+    def send_to_printer(path)
+      if RUBY_PLATFORM =~ /darwin/
+        `lpr -P #{@printer} -o raw #{path}`
+      else
+        `lp -d #{@printer} -o raw #{path}`
+      end
     end
   end
 end
