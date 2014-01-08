@@ -21,7 +21,6 @@ module Zebra
         send_to_printer tempfile.path
       ensure
         tempfile.close
-        tempfile.unlink
       end
     end
 

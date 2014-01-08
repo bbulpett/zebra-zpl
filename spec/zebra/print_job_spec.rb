@@ -32,11 +32,5 @@ describe Zebra::PrintJob do
       print_job.should_receive(:`).with("lpr -P Zebra -o raw /foo/bar")
       print_job.print label
     end
-
-    it "unlinks the file" do
-      tempfile.should_receive(:close)
-      tempfile.should_receive(:unlink)
-      print_job.print label
-    end
   end
 end
