@@ -111,5 +111,23 @@ describe Zebra::Epl::Label do
       tempfile.should_receive(:rewind)
       label.persist
     end
+
+    it "sets the `tempfile` attribute" do
+      label.persist
+      label.tempfile.should == tempfile
+    end
+  end
+
+  describe "#persisted?" do
+    it "returns false if the `tempfile` attribute is nil" do
+      label = described_class.new :print_speed => 2
+      label.should_not be_persisted
+    end
+
+    it "returns true if the `tempfile` attribute is not nil" do
+      label = described_class.new :print_speed => 2
+      label.instance_variable_set(:@tempfile, stub)
+      label.should be_persisted
+    end
   end
 end

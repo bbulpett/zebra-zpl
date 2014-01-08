@@ -7,7 +7,7 @@ module Zebra
       class InvalidPrintDensityError   < StandardError; end
       class PrintSpeedNotInformedError < StandardError; end
 
-      attr_reader :elements
+      attr_reader :elements, :tempfile
       attr_accessor :width, :length, :gap, :print_speed, :print_density
 
       def initialize(options = {})
@@ -63,7 +63,12 @@ module Zebra
         tempfile = Tempfile.new "zebra_label"
         dump_contents tempfile
         tempfile.rewind
+        @tempfile = tempfile
         tempfile
+      end
+
+      def persisted?
+        !!self.tempfile
       end
 
       private
