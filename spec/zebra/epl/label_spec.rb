@@ -107,11 +107,6 @@ describe Zebra::Epl::Label do
       label.persist.should == tempfile
     end
 
-    it "dumps its contents to the tempfile" do
-      tempfile.should_receive(:rewind)
-      label.persist
-    end
-
     it "sets the `tempfile` attribute" do
       label.persist
       label.tempfile.should == tempfile

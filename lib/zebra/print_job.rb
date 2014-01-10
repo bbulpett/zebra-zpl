@@ -16,12 +16,7 @@ module Zebra
 
     def print(label)
       tempfile = label.persist
-
-      begin
-        send_to_printer tempfile.path
-      ensure
-        tempfile.close
-      end
+      send_to_printer tempfile.path
     end
 
     private

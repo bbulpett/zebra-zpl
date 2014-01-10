@@ -62,7 +62,7 @@ module Zebra
       def persist
         tempfile = Tempfile.new "zebra_label"
         dump_contents tempfile
-        tempfile.rewind
+        tempfile.close
         @tempfile = tempfile
         tempfile
       end
