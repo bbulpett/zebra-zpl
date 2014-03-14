@@ -22,6 +22,16 @@ describe Zebra::Epl::Label do
       label.print_speed.should == 2
     end
 
+    it "sets the number of copies" do
+      label = described_class.new :copies => 4
+      label.copies.should == 4
+    end
+
+    it "the number of copies defaults to 1" do
+      label = described_class.new
+      label.copies.should == 1
+    end
+
     it "validates the printing speed" do
       [-1, 8, "a"].each do |s|
         expect {
@@ -63,7 +73,7 @@ describe Zebra::Epl::Label do
       label.print_speed    = 3
       label.print_density  = 10
       label.dump_contents(io)
-      io.should == "O\nQ200,24\nq100\nS3\nD10\n\nN\nfoobar\nblabla\nP0\n"
+      io.should == "O\nQ200,24\nq100\nS3\nD10\n\nN\nfoobar\nblabla\nP1\n"
     end
 
     it "does not try to set the label width when it's not informed (falls back to autosense)" do

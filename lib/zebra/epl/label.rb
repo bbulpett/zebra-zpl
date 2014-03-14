@@ -7,6 +7,7 @@ module Zebra
       class InvalidPrintDensityError   < StandardError; end
       class PrintSpeedNotInformedError < StandardError; end
 
+      attr_writer :copies
       attr_reader :elements, :tempfile
       attr_accessor :width, :length, :gap, :print_speed, :print_density
 
@@ -28,6 +29,10 @@ module Zebra
       def print_density=(d)
         raise InvalidPrintDensityError unless (0..15).include?(d)
         @print_density = d
+      end
+
+      def copies
+        @copies || 1
       end
 
       def <<(element)
@@ -56,7 +61,7 @@ module Zebra
           io << element.to_epl << "\n"
         end
 
-        io << "P0\n"
+        io << "P#{copies}\n"
       end
 
       def persist
