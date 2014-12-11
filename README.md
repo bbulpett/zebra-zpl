@@ -65,7 +65,27 @@ You need to have your printer visible to CUPS. Once your printer is configured a
 
 This will persist the label contents to a tempfile (using Ruby's tempfile core library) and copy the file to the printer using either `lpr -P <your-printer-name-on-cups> -o raw <path-to-the-temp-file>` (if you're on Mac OSX) or `lp -d <your-printer-name-on-cups> -o raw <path-to-the-tempfile>` (if you're on Linux). All the tempfile creation/path resolution, as well as which command has to be used, are handled by the `PrintJob` class. 
 
+### Printing QR codes
 
+    label = Zebra::Epl::Label.new(
+      :width=>350,
+      :length=>250,
+      :print_speed=>3,
+      :print_density=>6
+    )
+
+    qrcode = Zebra::Epl::Qrcode.new(
+      :data=>"www.github.com",
+      :position=>[50,10],
+      :scale_factor=>3,
+      :correction_level=>"H"
+    )
+
+    label << qrcode
+
+    print_job = Zebra::PrintJob.new "your-qr-printer-name-on-cups"
+
+    print_job.print label
 	
 ### Available elements
 
@@ -110,6 +130,14 @@ The available barcode types are:
 * `Zebra::Epl::BarcodeType::CODE_128_B`
 * `Zebra::Epl::BarcodeType::CODE_128_C`
 * `Zebra::Epl::BarcodeType::CODABAR`
+
+#### QR Codes
+
+You can create QR Codes elements to print using instances of the `Zebra::Epl::Qrcode` class. It accepts the following options:
+
+* `position`: An array with the coordinates to place the QR code, in dots.
+* `scale factor`: Crucial variable of the QR codes's size. Accepted values: 1-99.
+* `error correction level`: Algorithm enables reading damaged QR codes. There are four error correction levels: L - 7% of codewords can be restored, M - 15% can be restored, Q - 25% can be restored, H - 30% can be restored.
 
 #### Boxes
 

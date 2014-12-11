@@ -14,4 +14,4 @@ require "zebra/epl/text"
 require "zebra/epl/barcode"
 require "zebra/epl/barcode_type"
 require "zebra/print_job"
-
+require "zebra/epl/qrcode"
