@@ -59,6 +59,8 @@ You need to have your printer visible to CUPS. Once your printer is configured a
 	  :type                      => Zebra::Epl::BarcodeType::CODE_128_AUTO
 	)
 	
+	label << barcode
+	
 	print_job = Zebra::PrintJob.new "your-printer-name-on-cups"
 	
 	print_job.print label
