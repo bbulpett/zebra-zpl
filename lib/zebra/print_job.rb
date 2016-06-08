@@ -29,9 +29,9 @@ module Zebra
     def send_to_printer(path)
       # My ip is 192.168.101.99
       if RUBY_PLATFORM =~ /darwin/
-        `lpr -P #{@printer} -o raw #{path} -h 192.168.101.99[:631]`
+        `lpr -h 192.168.101.99 -P #{@printer}`
       else
-        `lp -d #{@printer} -o raw #{path} -h 192.168.101.99[:631]`
+        `lp -h 192.168.101.99 -d #{@printer}`
       end
     end
   end
