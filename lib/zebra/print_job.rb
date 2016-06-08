@@ -27,6 +27,7 @@ module Zebra
     end
 
     def send_to_printer(path)
+      puts "* * * * * * * * * * * * * * * * * * * * * * * * Sending file to printer #{@printer} * * * * * * * * * * * * * * * * * * * * * * * * * "
       # My ip is 192.168.101.99
       `lp -h 192.168.101.128 -d #{@printer} -o raw #{path}`
       # if RUBY_PLATFORM =~ /darwin/
