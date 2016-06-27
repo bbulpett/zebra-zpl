@@ -1,5 +1,5 @@
 module Zebra
-  module Epl
+  module Zpl
     module Printable
       class MissingAttributeError < StandardError
         def initialize(message)

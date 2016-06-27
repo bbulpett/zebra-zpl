@@ -1,7 +1,7 @@
-require "zebra/epl/printable"
+require "zebra/zpl/printable"
 
 module Zebra
-  module Epl
+  module Zpl
     class Box
       include Printable
 
@@ -18,7 +18,7 @@ module Zebra
         @end_position, @end_x, @end_y = coords, coords[0], coords[1]
       end
 
-      def to_epl
+      def to_zpl
         check_attributes
         ["X#{x}", y, line_thickness, end_x, end_y].join(",")
       end

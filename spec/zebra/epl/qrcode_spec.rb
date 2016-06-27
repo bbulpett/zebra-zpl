@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Zebra::Epl::Qrcode do
+describe Zebra::Zpl::Qrcode do
     it "can be initialized with the scale factor" do 
       qrcode = described_class.new :scale_factor => 3
       expect(qrcode.scale_factor).to eq 3
@@ -13,17 +13,17 @@ describe Zebra::Epl::Qrcode do
 
     describe "#scale_factor" do
       it "raises an error if the scale factor is not within the range 1-99" do
-        expect{described_class.new :scale_factor=>100}.to raise_error(Zebra::Epl::Qrcode::InvalidScaleFactorError)
+        expect{described_class.new :scale_factor=>100}.to raise_error(Zebra::Zpl::Qrcode::InvalidScaleFactorError)
       end
     end
 
     describe "#correction_level" do
       it "raises an error if the error correction_level not in [LMQH]" do
-        expect{described_class.new :correction_level=>"A"}.to raise_error(Zebra::Epl::Qrcode::InvalidCorrectionLevelError)
+        expect{described_class.new :correction_level=>"A"}.to raise_error(Zebra::Zpl::Qrcode::InvalidCorrectionLevelError)
       end
     end              
 
-    describe "#to_epl" do
+    describe "#to_zpl" do
       let(:valid_attributes) { {
         :position         => [50, 50],
         :scale_factor     => 3,
@@ -31,47 +31,47 @@ describe Zebra::Epl::Qrcode do
         :data             => "foobar"
       }}
       let(:qrcode) { described_class.new valid_attributes }
-      let(:tokens) { qrcode.to_epl.split(",") }
+      let(:tokens) { qrcode.to_zpl.split(",") }
 
       it "raises an error if the X position is not given" do
         qrcode = described_class.new :position => [nil, 50], :data => "foobar"
         expect {
-          qrcode.to_epl
-        }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the X value is not given")
+          qrcode.to_zpl
+        }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the X value is not given")
       end
 
       it "raises an error if the Y position is not given" do
         qrcode = described_class.new :position => [50, nil], :data => "foobar"
         expect {
-          qrcode.to_epl
-        }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
+          qrcode.to_zpl
+        }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
       end      
 
       it "raises an error if the data to be printed was not informed" do
         qrcode.data = nil
         expect {
-          qrcode.to_epl
-        }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the data to be printed is not given")
+          qrcode.to_zpl
+        }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the data to be printed is not given")
       end  
       
       it "raises an error if the scale factor is not given" do
         valid_attributes.delete :scale_factor
 
         expect {
-          qrcode.to_epl
-        }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the scale factor to be used is not given")
+          qrcode.to_zpl
+        }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the scale factor to be used is not given")
       end
 
       it "raises an error if the correction level is not given" do
         valid_attributes.delete :correction_level
 
         expect {
-          qrcode.to_epl
-        }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the error correction level to be used is not given")
+          qrcode.to_zpl
+        }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the error correction level to be used is not given")
       end  
 
       it "begins with the command 'b'" do
-        qrcode.to_epl.should =~ /\Ab/
+        qrcode.to_zpl.should =~ /\Ab/
       end 
 
       it "contains the X position" do

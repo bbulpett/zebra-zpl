@@ -1,5 +1,5 @@
 module Zebra
-  module Epl
+  module Zpl
     module Rotation
       class InvalidRotationError < StandardError; end
 

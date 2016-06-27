@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'zebra/epl/version'
+require 'zebra/zpl/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "zebra-epl"
-  spec.version       = Zebra::Epl::VERSION
-  spec.authors       = ["Cássio Marques"]
-  spec.email         = ["cassiommc@gmail.com"]
-  spec.description   = %q{Print labels using EPL2 and Ruby}
-  spec.summary       = %q{Simple DSL to create labels and send them to a Zebra printer using Ruby, EPL2 and CUPS}
-  spec.homepage      = "http://github.com/cassiomarques/zebra-epl"
+  spec.name          = "zebra-zpl"
+  spec.version       = Zebra::Zpl::VERSION
+  spec.authors       = ["Barnabas Bulpett"]
+  spec.email         = ["barnabasbulpett@gmail.com"]
+  spec.description   = %q{Print labels using ZPL2 and Ruby}
+  spec.summary       = %q{Simple DSL to create labels and send them to a Zebra printer using Ruby, ZPL2 and CUPS}
+  spec.homepage      = "http://github.com/bulpettb/zebra-zpl"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

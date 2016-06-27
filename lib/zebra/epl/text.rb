@@ -1,7 +1,7 @@
-require "zebra/epl/printable"
+require "zebra/zpl/printable"
 
 module Zebra
-  module Epl
+  module Zpl
     class Text
       include Printable
 
@@ -43,7 +43,7 @@ module Zebra
         @v_multiplier = multiplier
       end
 
-      def to_epl
+      def to_zpl
         check_attributes
         ["A#{x}", y, rotation, font, h_multiplier, v_multiplier, print_mode, "\"#{data}\""].join(",")
       end
