@@ -7,9 +7,9 @@ module Zebra
 
       attr_reader   :font
 
-      def font=(f)
-        Font.validate_font f
-        @font = f
+      def font_size=(f)
+        FontSize.validate_font_size f
+        @font_size = f
       end
 
       def print_mode=(mode)
@@ -45,7 +45,7 @@ module Zebra
 
       def to_zpl
         check_attributes
-        ["A#{x}", y, rotation, font, h_multiplier, v_multiplier, print_mode, "\"#{data}\""].join(",")
+        ["A#{x}", y, rotation, font_size, h_multiplier, v_multiplier, print_mode, "\"#{data}\""].join(",")
       end
 
       private
