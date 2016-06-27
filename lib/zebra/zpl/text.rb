@@ -5,7 +5,7 @@ module Zebra
     class Text
       include Printable
 
-      attr_reader   :font
+      attr_reader   :font_size
 
       def font_size=(f)
         FontSize.validate_font_size f
@@ -52,7 +52,7 @@ module Zebra
 
       def check_attributes
         super
-        raise MissingAttributeError.new("the font to be used is not given") unless @font
+        raise MissingAttributeError.new("the font_size to be used is not given") unless @font_size
       end
     end
   end
