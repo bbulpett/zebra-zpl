@@ -16,7 +16,7 @@ describe Zebra::Zpl::Text do
   end
 
   it "can be initialized with the font to be used" do
-    font = Zebra::Zpl::Font::SIZE_1
+    font = Zebra::Zpl::FontSize::SIZE_1
     text = described_class.new :font => font
     text.font.should == font
   end
@@ -57,7 +57,7 @@ describe Zebra::Zpl::Text do
     it "raises an error if the received font is invalid" do
       expect {
         described_class.new.font = 6
-      }.to raise_error(Zebra::Zpl::Font::InvalidFontError)
+      }.to raise_error(Zebra::Zpl::FontSize::InvalidFontSizeError)
     end
   end
 
@@ -86,7 +86,7 @@ describe Zebra::Zpl::Text do
   end
 
   describe "#to_zpl" do
-    subject(:text) { described_class.new :position => [100, 150], :font => Zebra::Zpl::Font::SIZE_3, :data => "foobar" }
+    subject(:text) { described_class.new :position => [100, 150], :font => Zebra::Zpl::FontSize::SIZE_3, :data => "foobar" }
 
     it "raises an error if the X position was not informed" do
       text = described_class.new :position => [nil, 100], :data => "foobar"
