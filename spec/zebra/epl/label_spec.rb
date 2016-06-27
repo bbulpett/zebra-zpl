@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Zebra::Epl::Label do
+describe Zebra::Zpl::Label do
   subject(:label) { described_class.new :print_speed => 2 }
 
   describe "#new" do
@@ -36,7 +36,7 @@ describe Zebra::Epl::Label do
       [-1, 8, "a"].each do |s|
         expect {
           described_class.new :print_speed => s
-        }.to raise_error(Zebra::Epl::Label::InvalidPrintSpeedError)
+        }.to raise_error(Zebra::Zpl::Label::InvalidPrintSpeedError)
       end
     end
 
@@ -49,7 +49,7 @@ describe Zebra::Epl::Label do
       [-1, 16, "a"].each do |d|
         expect {
           described_class.new :print_density => d
-        }.to raise_error(Zebra::Epl::Label::InvalidPrintDensityError)
+        }.to raise_error(Zebra::Zpl::Label::InvalidPrintDensityError)
       end
     end
   end
@@ -66,8 +66,8 @@ describe Zebra::Epl::Label do
     let(:io) { "" }
 
     it "dumps its contents to the received IO" do
-      label << stub(:to_epl => "foobar")
-      label << stub(:to_epl => "blabla")
+      label << stub(:to_zpl => "foobar")
+      label << stub(:to_zpl => "blabla")
       label.width          = 100
       label.length_and_gap = [200, 24]
       label.print_speed    = 3
@@ -95,7 +95,7 @@ describe Zebra::Epl::Label do
       label = described_class.new
       expect {
         label.dump_contents(io)
-      }.to raise_error(Zebra::Epl::Label::PrintSpeedNotInformedError)
+      }.to raise_error(Zebra::Zpl::Label::PrintSpeedNotInformedError)
     end
   end
 
@@ -105,7 +105,7 @@ describe Zebra::Epl::Label do
 
     before do
       Tempfile.stub :new => tempfile
-      label << stub(:to_epl => "foobar")
+      label << stub(:to_zpl => "foobar")
     end
 
     it "creates a tempfile" do

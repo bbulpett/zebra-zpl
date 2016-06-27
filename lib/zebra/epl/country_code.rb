@@ -1,6 +1,6 @@
 # encoding: utf-8
 module Zebra
-  module Epl
+  module Zpl
     class CountryCode
       class InvalidCountryCodeError < StandardError; end
 
