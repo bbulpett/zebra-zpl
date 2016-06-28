@@ -44,10 +44,11 @@ module Zebra
       end
 
       def to_zpl
+        debugger
         check_attributes
         # ["A#{x}", y, rotation, font_size, h_multiplier, v_multiplier, print_mode, "\"#{data}\""].join(",")
         # "A#{x}, y, rotation, font_size, h_multiplier, v_multiplier, print_mode, #{data}"
-        "^FB#{label.width},100,0,C,0^FD#{data}^FS"
+        "^FB#{width},100,0,C,0^FD#{data}^FS"
       end
 
       private
