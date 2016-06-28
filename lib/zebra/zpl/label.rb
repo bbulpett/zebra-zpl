@@ -60,6 +60,7 @@ module Zebra
         # io << "^XA^WD*:*.FNT*^XZ"
         # TEST ZPL SEGMENT
         io << "^WD*:*.FNT*"
+        io << "^WD*:*.FNT*"
         # elements.each do |element|
         #   io << element.to_zpl << "\n"
         # end
