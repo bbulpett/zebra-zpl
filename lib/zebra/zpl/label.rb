@@ -66,6 +66,7 @@ module Zebra
         # io << "^HH"
 
         elements.each do |element|
+          puts "++++++++++++++++++" + self.width + "++++++++++++++++"
           io << element.to_zpl[0]
         end
         # Specify how many copies to print
