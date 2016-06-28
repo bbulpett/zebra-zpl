@@ -57,7 +57,9 @@ module Zebra
         # TEST ZPL (comment everything else out)...
         # io << "^XA^WD*:*.FNT*^XZ"
         # TEST ZPL SEGMENT
-        io << "^WD*:*.FNT*"
+        # io << "^WD*:*.FNT*"
+        # TEST AND GET CONFIGS
+        io << "^HH"
         # elements.each do |element|
         #   io << element.to_zpl << "\n"
         # end
