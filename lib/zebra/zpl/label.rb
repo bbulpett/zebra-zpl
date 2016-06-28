@@ -26,10 +26,6 @@ module Zebra
         @print_speed = s
       end
 
-      def width=(width)
-        @width = self.width
-      end
-
       def print_density=(d)
         raise InvalidPrintDensityError unless (0..15).include?(d)
         @print_density = d
@@ -66,7 +62,7 @@ module Zebra
         # io << "^HH"
 
         elements.each do |element|
-          puts "++++++++++++++++++" + @width.to_s + "++++++++++++++++"
+          puts "****** WIDTH *******" + self.width
           io << element.to_zpl[0]
         end
         # Specify how many copies to print
