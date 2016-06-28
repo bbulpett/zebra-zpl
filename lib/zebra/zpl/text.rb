@@ -47,7 +47,7 @@ module Zebra
         check_attributes
         # ["A#{x}", y, rotation, font_size, h_multiplier, v_multiplier, print_mode, "\"#{data}\""].join(",")
         # "^FO#{x},#{y}^FB600,100,0,C,0^FD#{data}^FS"
-        "^FO25,25^FB600,100,0,C,0^FDFoo^FS"
+        # "^FO25,25^FB600,100,0,C,0^FDFoo^FS"
       end
 
       private
