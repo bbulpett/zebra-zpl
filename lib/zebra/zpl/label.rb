@@ -59,10 +59,11 @@ module Zebra
         # TEST ZPL SEGMENT
         # io << "^WD*:*.FNT*"
         # TEST AND GET CONFIGS
-        io << "^HH"
-        # elements.each do |element|
-        #   io << element.to_zpl << "\n"
-        # end
+        # io << "^HH"
+        
+        elements.each do |element|
+          io << element.to_zpl << "\n"
+        end
         # Specify how many copies to print
         io << "^PQ#{copies}"
         # End format
