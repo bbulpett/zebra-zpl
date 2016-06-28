@@ -16,11 +16,6 @@ module Zebra
         @elements = []
       end
 
-      def width=(w)
-        self.width = w
-        @label_width = self.width
-      end
-
       def length_and_gap=(length_and_gap)
         self.length = length_and_gap[0]
         self.gap    = length_and_gap[1]
@@ -67,8 +62,6 @@ module Zebra
         # io << "^HH"
 
         elements.each do |element|
-          puts "****** WIDTH *******" + width.to_s
-          puts "****** WIDTH *******" + @label_width.to_s
           io << element.to_zpl[0]
         end
         # Specify how many copies to print
