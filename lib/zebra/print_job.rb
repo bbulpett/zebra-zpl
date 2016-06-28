@@ -15,6 +15,7 @@ module Zebra
     end
 
     def print(label, ip)
+      debugger
       @remote_ip = ip
       tempfile = label.persist
       send_to_printer tempfile.path
