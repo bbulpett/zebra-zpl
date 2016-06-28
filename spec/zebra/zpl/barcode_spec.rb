@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Zebra::Epl::Barcode do
+describe Zebra::Zpl::Barcode do
   it "can be initialized with the position of the text to be printed" do
     barcode = described_class.new :position => [20, 40]
     barcode.position.should == [20,40]
@@ -9,19 +9,19 @@ describe Zebra::Epl::Barcode do
   end
 
   it "can be initialized with the barcode rotation" do
-    rotation = Zebra::Epl::Rotation::DEGREES_90
+    rotation = Zebra::Zpl::Rotation::DEGREES_90
     barcode = described_class.new :rotation => rotation
     barcode.rotation.should == rotation
   end
 
   it "can be initialized with the barcode rotation" do
-    rotation = Zebra::Epl::Rotation::DEGREES_90
+    rotation = Zebra::Zpl::Rotation::DEGREES_90
     barcode = described_class.new :rotation => rotation
     barcode.rotation.should == rotation
   end
 
   it "can be initialized with the barcode type" do
-    type = Zebra::Epl::BarcodeType::CODE_128_C
+    type = Zebra::Zpl::BarcodeType::CODE_128_C
     barcode = described_class.new :type => type
     barcode.type.should == type
   end
@@ -50,7 +50,7 @@ describe Zebra::Epl::Barcode do
     it "raises an error if the received rotation is invalid" do
       expect {
         described_class.new.rotation = 4
-      }.to raise_error(Zebra::Epl::Rotation::InvalidRotationError)
+      }.to raise_error(Zebra::Zpl::Rotation::InvalidRotationError)
     end
   end
 
@@ -58,23 +58,23 @@ describe Zebra::Epl::Barcode do
     it "raises an error if the received type is invalid" do
       expect {
         described_class.new.type = "ZZZ"
-      }.to raise_error(Zebra::Epl::BarcodeType::InvalidBarcodeTypeError)
+      }.to raise_error(Zebra::Zpl::BarcodeType::InvalidBarcodeTypeError)
     end
   end
 
   describe "#narrow_bar_width=" do
     it "raises an error if the type is Code 128 and the width is invalid" do
       expect {
-        described_class.new :type => Zebra::Epl::BarcodeType::CODE_128_AUTO, :narrow_bar_width => 20
-      }.to raise_error(Zebra::Epl::Barcode::InvalidNarrowBarWidthError)
+        described_class.new :type => Zebra::Zpl::BarcodeType::CODE_128_AUTO, :narrow_bar_width => 20
+      }.to raise_error(Zebra::Zpl::Barcode::InvalidNarrowBarWidthError)
     end
   end
 
   describe "#wide_bar_width=" do
     it "raises an error if the type is Code 128 and the width is invalid" do
       expect {
-        described_class.new :type => Zebra::Epl::BarcodeType::CODE_128_AUTO, :wide_bar_width => 40
-      }.to raise_error(Zebra::Epl::Barcode::InvalidWideBarWidthError)
+        described_class.new :type => Zebra::Zpl::BarcodeType::CODE_128_AUTO, :wide_bar_width => 40
+      }.to raise_error(Zebra::Zpl::Barcode::InvalidWideBarWidthError)
     end
   end
 
@@ -84,71 +84,71 @@ describe Zebra::Epl::Barcode do
     end
   end
 
-  describe "#to_epl" do
+  describe "#to_zpl" do
     let(:valid_attributes) { {
       :position         => [100, 150],
-      :type             => Zebra::Epl::BarcodeType::CODE_128_AUTO,
+      :type             => Zebra::Zpl::BarcodeType::CODE_128_AUTO,
       :height           => 20,
       :narrow_bar_width => 4,
       :wide_bar_width   => 6,
       :data             => "foobar"
     } }
     let(:barcode) { described_class.new valid_attributes }
-    let(:tokens) { barcode.to_epl.split(",") }
+    let(:tokens) { barcode.to_zpl.split(",") }
 
     it "raises an error if the X position was not informed" do
       barcode = described_class.new :position => [nil, 100], :data => "foobar"
       expect {
-        barcode.to_epl
-      }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the X value is not given")
+        barcode.to_zpl
+      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the X value is not given")
     end
 
     it "raises an error if the Y position was not informed" do
       barcode = described_class.new :position => [100, nil]
       expect {
-        barcode.to_epl
-      }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
+        barcode.to_zpl
+      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
     end
 
     it "raises an error if the barcode type is not informed" do
       barcode = described_class.new :position => [100, 100], :data => "foobar"
       expect {
-        barcode.to_epl
-      }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the barcode type to be used is not given")
+        barcode.to_zpl
+      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the barcode type to be used is not given")
     end
 
     it "raises an error if the data to be printed was not informed" do
       barcode.data = nil
       expect {
-        barcode.to_epl
-      }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the data to be printed is not given")
+        barcode.to_zpl
+      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the data to be printed is not given")
     end
 
     it "raises an error if the height to be used was not informed" do
       barcode.height = nil
       expect {
-        barcode.to_epl
-      }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the height to be used is not given")
+        barcode.to_zpl
+      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the height to be used is not given")
     end
 
     it "raises an error if the narrow bar width is not given" do
       valid_attributes.delete :narrow_bar_width
 
       expect {
-        barcode.to_epl
-      }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the narrow bar width to be used is not given")
+        barcode.to_zpl
+      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the narrow bar width to be used is not given")
     end
 
     it "raises an error if the wide bar width is not given" do
       valid_attributes.delete :wide_bar_width
 
       expect {
-        barcode.to_epl
-      }.to raise_error(Zebra::Epl::Printable::MissingAttributeError, "Can't print if the wide bar width to be used is not given")
+        barcode.to_zpl
+      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the wide bar width to be used is not given")
     end
 
     it "begins with the command 'B'" do
-      barcode.to_epl.should =~ /\AB/
+      barcode.to_zpl.should =~ /\AB/
     end
 
     it "contains the X position" do
@@ -160,11 +160,11 @@ describe Zebra::Epl::Barcode do
     end
 
     it "contains the barcode rotation" do
-      tokens[2].should == Zebra::Epl::Rotation::NO_ROTATION.to_s
+      tokens[2].should == Zebra::Zpl::Rotation::NO_ROTATION.to_s
     end
 
     it "contains the barcode type" do
-      tokens[3].should == Zebra::Epl::BarcodeType::CODE_128_AUTO
+      tokens[3].should == Zebra::Zpl::BarcodeType::CODE_128_AUTO
     end
 
     it "contains the barcode narrow bar width" do

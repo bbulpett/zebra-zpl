@@ -1,6 +1,6 @@
 # encoding: utf-8
 module Zebra
-  module Epl
+  module Zpl
     class CharacterSet
       class InvalidNumberOfDataBits                     < StandardError; end
       class CountryCodeNotApplicableForNumberOfDataBits < StandardError; end
@@ -31,7 +31,7 @@ module Zebra
         @country_code = code
       end
 
-      def to_epl
+      def to_zpl
         raise MissingAttributeError.new("language") if language.nil?
         raise MissingAttributeError.new("number of data bits") if number_of_data_bits.nil?
         raise MissingAttributeError.new("country code") if number_of_data_bits == 8 && country_code.nil?

@@ -1,5 +1,5 @@
 module Zebra
-  module Epl
+  module Zpl
     module BarcodeType
       class InvalidBarcodeTypeError < StandardError; end
 
