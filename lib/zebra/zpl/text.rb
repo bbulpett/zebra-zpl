@@ -1,15 +1,15 @@
-require "zebra/epl/printable"
+require "zebra/zpl/printable"
 
 module Zebra
-  module Epl
+  module Zpl
     class Text
       include Printable
 
-      attr_reader   :font
+      attr_reader   :font_size
 
-      def font=(f)
-        Font.validate_font f
-        @font = f
+      def font_size=(f)
+        FontSize.validate_font_size f
+        @font_size = f
       end
 
       def print_mode=(mode)
@@ -43,16 +43,16 @@ module Zebra
         @v_multiplier = multiplier
       end
 
-      def to_epl
+      def to_zpl
         check_attributes
-        ["A#{x}", y, rotation, font, h_multiplier, v_multiplier, print_mode, "\"#{data}\""].join(",")
+        ["A#{x}", y, rotation, font_size, h_multiplier, v_multiplier, print_mode, "\"#{data}\""].join(",")
       end
 
       private
 
       def check_attributes
         super
-        raise MissingAttributeError.new("the font to be used is not given") unless @font
+        raise MissingAttributeError.new("the font_size to be used is not given") unless @font_size
       end
     end
   end

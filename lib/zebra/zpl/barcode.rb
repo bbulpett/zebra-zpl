@@ -1,7 +1,7 @@
-require "zebra/epl/printable"
+require "zebra/zpl/printable"
 
 module Zebra
-  module Epl
+  module Zpl
     class Barcode
       include Printable
 
@@ -31,7 +31,7 @@ module Zebra
         @print_human_readable_code || false
       end
 
-      def to_epl
+      def to_zpl
         check_attributes
         human_readable = print_human_readable_code ? "B" : "N"
         ["B#{x}", y, rotation, type, narrow_bar_width, wide_bar_width, height, human_readable, "\"#{data}\""].join(",")

@@ -1,7 +1,7 @@
-require "zebra/epl/printable"
+require "zebra/zpl/printable"
 
 module Zebra
-  module Epl
+  module Zpl
     class Qrcode
       include Printable
 
@@ -20,7 +20,7 @@ module Zebra
         @correction_level = value
       end
 
-      def to_epl
+      def to_zpl
         check_attributes
         ["b#{x}", y, "Q", "s#{scale_factor}", "e#{correction_level}", "\"#{data}\""].join(",")
       end

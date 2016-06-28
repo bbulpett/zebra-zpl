@@ -1,6 +1,6 @@
 # encoding: utf-8
 module Zebra
-  module Epl
+  module Zpl
     class Language
       class InvalidLanguageError                    < StandardError; end
       class InvalidLanguageForNumberOfDataBitsError < StandardError; end
