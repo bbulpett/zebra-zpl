@@ -5,7 +5,7 @@ module Zebra
     class Text
       include Printable
 
-      attr_reader   :font_size, :width
+      attr_reader   :font_size
 
       def font_size=(f)
         FontSize.validate_font_size f
@@ -44,10 +44,8 @@ module Zebra
       end
 
       def to_zpl
-        # debugger
         check_attributes
         # ["A#{x}", y, rotation, font_size, h_multiplier, v_multiplier, print_mode, "\"#{data}\""].join(",")
-        # "A#{x}, y, rotation, font_size, h_multiplier, v_multiplier, print_mode, #{data}"
         "^FB800,100,0,C,0^FD#{data}^FS"
       end
 
