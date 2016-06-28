@@ -3,14 +3,16 @@ module Zebra
     module FontSize
       class InvalidFontSizeError < StandardError; end
 
-      SIZE_1 = 1
-      SIZE_2 = 2
-      SIZE_3 = 3
-      SIZE_4 = 4
-      SIZE_5 = 5
+      SIZE_1 = 17 # 6pt
+      SIZE_2 = 22 # 8pt
+      SIZE_3 = 28 # 10pt
+      SIZE_4 = 33 # 12pt
+      SIZE_5 = 44 # 16pt
+      SIZE_6 = 67 # 24pt
+      SIZE_7 = 100 # 32pt
 
       def self.valid_font_size?(font_size)
-        (1..5).include?(font_size.to_i) || ('A'..'Z').include?(font_size)
+        [17, 22, 28, 33, 44, 67, 100].include?(font_size.to_i) || ('A'..'Z').include?(font_size)
       end
 
       def self.validate_font_size(font_size)
