@@ -23,7 +23,7 @@ module Zebra
       # CODABAR             = "K"
 
       def self.valid_barcode_type?(type)
-        %w(3 3C 9 1 1A 1B 1C K).include? type
+        %w(3 A C K 0 O D Q).include? type
       end
 
       def self.validate_barcode_type(type)
