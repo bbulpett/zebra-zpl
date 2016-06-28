@@ -29,8 +29,8 @@ module Zebra
 
     def send_to_printer(path)
       puts "* * * * * * * * * * * * Sending file to printer #{@printer} at #{@remote_ip} * * * * * * * * * * "
-      `lp -h #{@remote_ip} -d #{@printer} -o raw #{path}`
-
+      # `lp -h #{@remote_ip} -d #{@printer} -o raw #{path}`
+      `lp -h #{@remote_ip} -d #{@printer} -o raw ../zpl_test.zpl`
     end
   end
 end
