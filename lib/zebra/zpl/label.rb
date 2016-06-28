@@ -11,6 +11,8 @@ module Zebra
       attr_reader :elements, :tempfile
       attr_accessor :width, :length, :gap, :print_speed, :print_density
 
+      @label_width = width
+
       def initialize(options = {})
         options.each_pair { |key, value| self.__send__("#{key}=", value) if self.respond_to?("#{key}=") }
         @elements = []
@@ -63,6 +65,7 @@ module Zebra
 
         elements.each do |element|
           puts "****** WIDTH *******" + self.width.to_s
+          puts "****** WIDTH *******" + @label_width.to_s
           io << element.to_zpl[0]
         end
         # Specify how many copies to print
