@@ -33,8 +33,9 @@ module Zebra
 
       def to_zpl
         check_attributes
-        human_readable = print_human_readable_code ? "B" : "N"
-        ["B#{x}", y, rotation, type, narrow_bar_width, wide_bar_width, height, human_readable, "\"#{data}\""].join(",")
+        human_readable = print_human_readable_code ? "Y" : "N"
+        # ["B#{x}", y, rotation, type, narrow_bar_width, wide_bar_width, height, human_readable, "\"#{data}\""].join(",")
+        "^FO#{x},#{y}^B#{type}#{rotation},#{height},#{human_readable},N,N^FD#{data}"
       end
 
       private
