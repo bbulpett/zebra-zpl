@@ -65,7 +65,7 @@ module Zebra
           io << element.to_zpl
         end
         # Specify how many copies to print
-        # io << "^PQ#{copies}"
+        io << "^PQ#{copies}"
         # End format
         io << "^XZ"
       end
