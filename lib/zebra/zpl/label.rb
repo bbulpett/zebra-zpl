@@ -11,11 +11,14 @@ module Zebra
       attr_reader :elements, :tempfile
       attr_accessor :width, :length, :gap, :print_speed, :print_density
 
-      @label_width = width
-
       def initialize(options = {})
         options.each_pair { |key, value| self.__send__("#{key}=", value) if self.respond_to?("#{key}=") }
         @elements = []
+      end
+
+      def width=(w)
+        self.width = w
+        @label_width = self.width
       end
 
       def length_and_gap=(length_and_gap)
@@ -64,7 +67,7 @@ module Zebra
         # io << "^HH"
 
         elements.each do |element|
-          puts "****** WIDTH *******" + self.width.to_s
+          puts "****** WIDTH *******" + width.to_s
           puts "****** WIDTH *******" + @label_width.to_s
           io << element.to_zpl[0]
         end
