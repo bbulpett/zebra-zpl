@@ -62,7 +62,7 @@ module Zebra
         # io << "^HH"
 
         elements.each do |element|
-          io << element.to_zpl[0]
+          io << element.to_zpl
         end
         # Specify how many copies to print
         io << "^PQ#{copies}"
