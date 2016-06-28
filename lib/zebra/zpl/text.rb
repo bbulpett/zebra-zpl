@@ -4,11 +4,9 @@ module Zebra
   module Zpl
     class Text
       include Printable
-      include Label
 
-      attr_reader   :font_size
-      attr_reader   :width
-
+      attr_reader   :font_size, :width
+, :width
       def font_size=(f)
         FontSize.validate_font_size f
         @font_size = f
