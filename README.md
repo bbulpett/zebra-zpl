@@ -1,4 +1,4 @@
-#### This is a gem based on a terrific older gem by Cassio Marques. Although the new printers are mostly compatible with old Eltron (Zpl) code, my needs require many of the new Zebra (ZPL) functions. 
+#### This is a gem based on a terrific older gem by Cassio Marques. Although the new printers are mostly compatible with old Eltron (Epl) code, my needs require many of the new Zebra (ZPL) functions. 
 
 # Zebra::Zpl
 
