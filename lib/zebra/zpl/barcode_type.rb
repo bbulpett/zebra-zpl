@@ -4,16 +4,26 @@ module Zebra
       class InvalidBarcodeTypeError < StandardError; end
 
       CODE_39             = "3"
-      CODE_39_CHECK_DIGIT = "3C"
-      CODE_93             = "9"
-      CODE_128_AUTO       = "1"
-      CODE_128_A          = "1A"
-      CODE_128_B          = "1B"
-      CODE_128_C          = "1C"
+      CODE_93             = "A"
+      CODE_128_AUTO       = "C"
       CODABAR             = "K"
+      CODE_AZTEC          = "0"
+      CODE_AZTEC_PARAMS   = "O"
+      CODE_UPS_MAXICODE   = "D"
+      CODE_QR             = "Q"
+
+      # Legacy (EPL) bar code suffixes
+      # CODE_39             = "3"
+      # CODE_39_CHECK_DIGIT = "3C"
+      # CODE_93             = "9"
+      # CODE_128_AUTO       = "1"
+      # CODE_128_A          = "1A"
+      # CODE_128_B          = "1B"
+      # CODE_128_C          = "1C"
+      # CODABAR             = "K"
 
       def self.valid_barcode_type?(type)
-        %w(3 3C 9 1 1A 1B 1C K).include? type
+        %w(3 A C K 0 O D Q).include? type
       end
 
       def self.validate_barcode_type(type)

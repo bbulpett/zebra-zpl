@@ -127,13 +127,13 @@ You create barcode elements to print using instances of the `Zebra::Zpl::Barcode
 The available barcode types are:
 
 * `Zebra::Zpl::BarcodeType::CODE_39`
-* `Zebra::Zpl::BarcodeType::CODE_39_CHECK_DIGIT`
 * `Zebra::Zpl::BarcodeType::CODE_93`
 * `Zebra::Zpl::BarcodeType::CODE_128_AUTO`
-* `Zebra::Zpl::BarcodeType::CODE_128_A`
-* `Zebra::Zpl::BarcodeType::CODE_128_B`
-* `Zebra::Zpl::BarcodeType::CODE_128_C`
 * `Zebra::Zpl::BarcodeType::CODABAR`
+* `Zebra::Zpl::BarcodeType::CODE_AZTEC`
+* `Zebra::Zpl::BarcodeType::CODE_AZTEC_PARAMS`
+* `Zebra::Zpl::BarcodeType::CODE_UPS_MAXICODE`
+* `Zebra::Zpl::BarcodeType::CODE_QR`
 
 #### QR Codes
 
