@@ -26,6 +26,10 @@ module Zebra
         @print_speed = s
       end
 
+      def width=(width)
+        @width = self.width
+      end
+
       def print_density=(d)
         raise InvalidPrintDensityError unless (0..15).include?(d)
         @print_density = d
