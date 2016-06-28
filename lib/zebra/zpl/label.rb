@@ -58,7 +58,7 @@ module Zebra
         io << "N\n"
 
         elements.each do |element|
-          io << element.to_epl << "\n"
+          io << element.to_zpl << "\n"
         end
 
         io << "P#{copies}\n"
