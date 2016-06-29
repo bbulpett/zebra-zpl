@@ -14,6 +14,14 @@ module Zebra
         @line_thickness = thickness
       end
 
+      def box_width=(width)
+        @box_width = width
+      end
+
+      def box_height=(height)
+        @box_height = height
+      end
+
       def to_zpl
         check_attributes
         # "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
