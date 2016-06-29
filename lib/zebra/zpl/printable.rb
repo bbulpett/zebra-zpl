@@ -18,6 +18,15 @@ module Zebra
         @position, @x, @y = coords, coords[0], coords[1]
       end
 
+      def justification=(just)
+        Justification.validate_justification just
+        @justification = just
+      end
+
+      def justification
+        @justification || Justification::LEFT
+      end
+
       def rotation=(rot)
         Rotation.validate_rotation rot
         @rotation = rot
