@@ -27,7 +27,7 @@ module Zebra
       end
 
       def print_density=(d)
-        raise InvalidPrintDensityError unless (0..15).include?(d)
+        raise InvalidPrintDensityError unless (0..6).include?(d)
         @print_density = d
       end
 
