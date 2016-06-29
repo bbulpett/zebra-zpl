@@ -46,7 +46,9 @@ module Zebra
       def to_zpl
         check_attributes
         # ["A#{x}", y, rotation, font_size, h_multiplier, v_multiplier, print_mode, "\"#{data}\""].join(",")
-        ["A#{x}", y, rotation, font_size, h_multiplier, v_multiplier, print_mode, "\"#{data}\""]
+        # "^FO25,25^FB600,100,0,C,0^FDFoo^FS"
+
+        "^CF0,#{font_size},#{font_size}^FO#{x},#{y}^FB600,4,0,L,0^FD#{data}^FS"
       end
 
       private
