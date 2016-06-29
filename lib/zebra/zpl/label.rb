@@ -27,7 +27,7 @@ module Zebra
       end
 
       def print_density=(d)
-        raise InvalidPrintDensityError unless (0..15).include?(d)
+        raise InvalidPrintDensityError unless (0..6).include?(d)
         @print_density = d
       end
 
@@ -52,7 +52,6 @@ module Zebra
         io << "^PR#{print_speed}"
         # Density (D command) "Carried over from EPL, does this exist in ZPL ????"
         # io << "D#{print_density}\n" if print_density
-        # ZT = Printing from top of image buffer.
 
         # TEST ZPL (comment everything else out)...
         # io << "^XA^WD*:*.FNT*^XZ"
@@ -71,6 +70,7 @@ module Zebra
       end
 
       def persist
+        # debugger
         tempfile = Tempfile.new "zebra_label"
         dump_contents tempfile
         tempfile.close

@@ -7,20 +7,25 @@ module Zebra
 
       class InvalidLineThickness < StandardError; end
 
-      attr_reader :line_thickness, :end_position, :end_x, :end_y
+      attr_reader :line_thickness, :box_width, :box_height
 
       def line_thickness=(thickness)
         raise InvalidLineThickness unless thickness.nil? || thickness.to_i.to_s == thickness.to_s
         @line_thickness = thickness
       end
 
-      def end_position=(coords)
-        @end_position, @end_x, @end_y = coords, coords[0], coords[1]
+      def box_width=(width)
+        @box_width = width
+      end
+
+      def box_height=(height)
+        @box_height = height
       end
 
       def to_zpl
         check_attributes
-        ["X#{x}", y, line_thickness, end_x, end_y].join(",")
+        # "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
+        "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
       end
 
       private
@@ -32,8 +37,8 @@ module Zebra
       def check_attributes
         super
         raise MissingAttributeError.new("the line thickness is not given") unless line_thickness
-        raise MissingAttributeError.new("the horizontal end position (X) is not given") unless end_x
-        raise MissingAttributeError.new("the vertical end position (Y) is not given") unless end_y
+        raise MissingAttributeError.new("the box_width is not given") unless box_width
+        raise MissingAttributeError.new("the box_height is not given") unless box_height
       end
     end
   end
