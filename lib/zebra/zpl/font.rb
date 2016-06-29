@@ -21,5 +21,26 @@ module Zebra
         raise InvalidFontSizeError unless valid_font_size?(font_size)
       end
     end
+
+    module FontType
+      class InvalidFontTypeError < StandardError; end
+
+      TYPE_0  = "0" # 6pt
+      TYPE_CD = "CD" # 6pt
+      TYPE_A  = "A" # 6pt
+      TYPE_B  = "B" # 6pt
+      TYPE_E  = "E" # 6pt
+      TYPE_F  = "F" # 6pt
+      TYPE_G  = "G" # 6pt
+      TYPE_H  = "H" # 6pt
+
+      def self.valid_font_size?(font_type)
+        ["0", "CD", "A", "B", "E", "F", "G", "H"].include?(font_type)
+      end
+
+      def self.validate_font_size(font_type)
+        raise InvalidFontTypeError unless valid_font_size?(font_type)
+      end
+    end
   end
 end
