@@ -16,6 +16,9 @@ module Zebra
 
       def position=(coords)
         @position, @x, @y = coords, coords[0], coords[1]
+        if @justification
+          @x = 0
+        end
       end
 
       def justification=(just)
