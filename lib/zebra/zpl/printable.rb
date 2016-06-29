@@ -15,12 +15,7 @@ module Zebra
       end
 
       def position=(coords)
-        unless @justification.blank?
-          @x = coords[0]
-        else
-          @x = 0
-        end
-        @position, @y = coords, coords[1]
+        @position, @x, @y = coords, coords[0], coords[1]
       end
 
       def justification=(just)
