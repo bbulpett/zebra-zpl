@@ -52,7 +52,6 @@ module Zebra
         io << "^PR#{print_speed}"
         # Density (D command) "Carried over from EPL, does this exist in ZPL ????"
         # io << "D#{print_density}\n" if print_density
-        # ZT = Printing from top of image buffer.
 
         # TEST ZPL (comment everything else out)...
         # io << "^XA^WD*:*.FNT*^XZ"
