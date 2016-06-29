@@ -20,7 +20,9 @@ module Zebra
 
       def to_zpl
         check_attributes
-        ["X#{x}", y, line_thickness, end_x, end_y].join(",")
+        box_width = end_x.to_i - x.to_i
+        box_height = end_y.to_i - y.to_i
+        "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
       end
 
       private

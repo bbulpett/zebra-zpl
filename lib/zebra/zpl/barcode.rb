@@ -35,7 +35,7 @@ module Zebra
         check_attributes
         human_readable = print_human_readable_code ? "Y" : "N"
         # ["B#{x}", y, rotation, type, narrow_bar_width, wide_bar_width, height, human_readable, "\"#{data}\""].join(",")
-        "^FO#{x},#{y}^FB800,4,0,C,0^B#{type}#{rotation},#{height},#{human_readable},N,N^FD#{data}"
+        "^FO#{x},#{y}^FB800,4,0,#{justification},0^B#{type}#{rotation},#{height},#{human_readable},N,N^FD#{data}"
       end
 
       private
