@@ -25,7 +25,7 @@ module Zebra
       def to_zpl
         check_attributes
         # "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
-        "^FO#{x},#{y}^GB#{box_width},#{box-height},#{line_thickness}^FS"
+        "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
       end
 
       private
