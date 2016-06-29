@@ -10,7 +10,7 @@ module Zebra
       JUSTIFIED   = 'J'
 
       def self.valid_justification?(justification)
-        [NO_ROTATION, DEGREES_90, DEGREES_180, DEGREES_270].include? justification
+        [LEFT, RIGHT, CENTER, JUSTIFIED].include? justification
       end
 
       def self.validate_justification(justification)
