@@ -34,16 +34,7 @@ module Zebra
       def to_zpl
         check_attributes
         human_readable = print_human_readable_code ? "Y" : "N"
-        @justification = case justification
-          when "L", "J"
-            0
-          when "R"
-            1
-          else # Default is centered ("C")
-            2
-        end
-
-        "^FO#{x},#{y},#{@justification}^B#{type}#{rotation},#{height},#{human_readable}^FD#{data}^FS"
+        "^FO#{x},#{y}^BY#{narrow_bar_width}^B#{type}#{rotation},#{height},#{human_readable}^FD#{data}^FS"
       end
 
       private
