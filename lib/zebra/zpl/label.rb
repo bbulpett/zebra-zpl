@@ -71,6 +71,7 @@ module Zebra
       end
 
       def persist
+        debugger
         tempfile = Tempfile.new "zebra_label"
         dump_contents tempfile
         tempfile.close
