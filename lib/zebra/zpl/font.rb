@@ -3,7 +3,7 @@ module Zebra
     module FontSize
       class InvalidFontSizeError < StandardError; end
 
-      SIZE_0 = 8 # tiny
+      SIZE_0 = 12 # tiny
       SIZE_1 = 17 # 6pt
       SIZE_2 = 22 # 8pt
       SIZE_3 = 28 # 10pt
