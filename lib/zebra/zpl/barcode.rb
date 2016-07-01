@@ -9,8 +9,12 @@ module Zebra
       class InvalidWideBarWidthError   < StandardError; end
 
       attr_accessor :height
-      attr_reader :type, :narrow_bar_width, :wide_bar_width
+      attr_reader :type, :narrow_bar_width, :wide_bar_width, :width
       attr_writer :print_human_readable_code
+
+      def width=(width)
+        @width = width || 0
+      end
 
       def type=(type)
         BarcodeType.validate_barcode_type(type)

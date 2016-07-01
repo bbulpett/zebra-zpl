@@ -36,6 +36,7 @@ module Zebra
       end
 
       def <<(element)
+        element.width = self.width
         elements << element
       end
 
