@@ -13,7 +13,7 @@ module Zebra
       attr_writer :print_human_readable_code
 
       def width=(width)
-        @width = width || ''
+        @width = width || 0
       end
 
       def type=(type)
