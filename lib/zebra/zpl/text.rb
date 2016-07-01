@@ -12,6 +12,10 @@ module Zebra
         @font_size = f
       end
 
+      def width=(width)
+        @width = width || ''
+      end
+
       def font_type=(type)
         FontType.validate_font_type type
         @font_type = type
