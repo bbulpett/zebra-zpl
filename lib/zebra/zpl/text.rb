@@ -62,7 +62,7 @@ module Zebra
         # "^FO25,25^FB600,100,0,C,0^FDFoo^FS"
 
         # "^CF#{font_type},#{font_size}^FO#{x},#{y}^FB609,4,0,#{justification},0^FD#{data}^FS"
-        "^CF#{font_type},#{font_size}^CI28^FO#{x},#{y}^FB609,4,0,#{justification},0^FD#{data}^FS"
+        "^CF#{font_type},#{font_size}^CI28^FO#{x},#{y}^FB812,4,0,#{justification},0^FD#{data}^FS"
       end
 
       private
