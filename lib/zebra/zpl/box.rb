@@ -7,7 +7,7 @@ module Zebra
 
       class InvalidLineThickness < StandardError; end
 
-      attr_reader :line_thickness, :box_width, :box_height
+      attr_reader :line_thickness, :box_width, :box_height, :width
 
       def line_thickness=(thickness)
         raise InvalidLineThickness unless thickness.nil? || thickness.to_i.to_s == thickness.to_s
@@ -16,6 +16,11 @@ module Zebra
 
       def box_width=(width)
         @box_width = width
+      end
+
+      ### The method below refers to the "label width"
+      def width=(width)
+        @width = width || 0
       end
 
       def box_height=(height)
