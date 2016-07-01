@@ -63,7 +63,7 @@ module Zebra
 
         elements.each do |element|
           io << element.to_zpl
-          puts element.data + ".... " + element.width + " dots"
+          puts element.data.to_s + ".... " + element.width.to_s + " dots"
         end
         # Specify how many copies to print
         io << "^PQ#{copies}"
