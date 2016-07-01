@@ -36,6 +36,7 @@ module Zebra
       end
 
       def <<(element)
+        element.width = self.width
         elements << element
       end
 
@@ -62,6 +63,7 @@ module Zebra
 
         elements.each do |element|
           io << element.to_zpl
+          puts element
         end
         # Specify how many copies to print
         io << "^PQ#{copies}"
