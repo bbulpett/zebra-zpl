@@ -43,8 +43,6 @@ module Zebra
         check_required_configurations
         # Start format
         io << "^XA"
-        # Reset font defaults
-        io << "^CF0,30"
         # ^LL<label height in dots>,<space between labels in dots>
         # io << "^LL#{length},#{gap}\n" if length && gap
         io << "^LL#{length}" if length
