@@ -47,6 +47,10 @@ module Zebra
         # ^LL<label height in dots>,<space between labels in dots>
         # io << "^LL#{length},#{gap}\n" if length && gap
         io << "^LL#{length}" if length
+        # ^LH<label home - x,y coordinates of top left label>
+        io << "^LH0,0"
+        # ^LS<shift the label to the left(or right)>
+        io << "^LS-10"
         # ^PW<label width in dots>
         io << "^PW#{width}" if width
         # Print Rate(speed) (^PR command)

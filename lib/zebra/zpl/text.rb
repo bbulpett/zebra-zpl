@@ -13,7 +13,7 @@ module Zebra
       end
 
       def width=(width)
-        @width = width-15 || 0
+        @width = width || 0
       end
 
       def font_type=(type)
