@@ -14,10 +14,10 @@ module Zebra
         options.each_pair { |attribute, value| self.__send__ "#{attribute}=", value }
       end
 
-      def position=(coords, margin)
+      def position=(coords)
         debugger
         @position = coords
-        @x = (margin > 0) ? coords[0] : margin
+        @x = (@margin > 0) ? coords[0] : @margin
         @y = coords[1]
       end
 
