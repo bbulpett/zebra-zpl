@@ -7,7 +7,7 @@ module Zebra
         end
       end
 
-      attr_reader :position, :x, :y
+      attr_reader :position, :x, :y, :margin
       attr_accessor :data
 
       def initialize(options = {})
@@ -15,7 +15,9 @@ module Zebra
       end
 
       def position=(coords)
-        @position, @x, @y = coords, coords[0], coords[1]
+        @position = coords
+        @x = (@margin.nil? || @margin == 0) ? coords[0] : @margin
+        @y = coords[1]
       end
 
       def justification=(just)
@@ -25,6 +27,10 @@ module Zebra
 
       def justification
         @justification || Justification::LEFT
+      end
+
+      def margin=(margin)
+        @margin = margin || 0
       end
 
       def rotation=(rot)

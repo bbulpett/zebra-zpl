@@ -13,7 +13,11 @@ module Zebra
       end
 
       def width=(width)
-        @width = width || 0
+        unless (margin.nil? || margin < 1)
+          @width = (width - (margin*2))
+        else
+          @width = width || 0
+        end
       end
 
       def font_type=(type)
