@@ -15,7 +15,6 @@ module Zebra
       def width=(width)
         if (margin > 0)
           @width = (width - (margin*2))
-        end
         else
           @width = width || 0
         end
