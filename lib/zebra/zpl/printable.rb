@@ -15,7 +15,6 @@ module Zebra
       end
 
       def position=(coords)
-        debugger
         @position = coords
         @x = (@margin > 0) ? coords[0] : @margin
         @y = coords[1]
