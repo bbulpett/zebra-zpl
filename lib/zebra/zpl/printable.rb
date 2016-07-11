@@ -16,7 +16,7 @@ module Zebra
 
       def position=(coords)
         @position = coords
-        @x = (@margin.nil? || @margin == 0) ? coords[0] : @margin
+        @x = (@margin.nil? || @margin == 0) ? coords[0] : (@margin + coords[0])
         @y = coords[1]
       end
 
