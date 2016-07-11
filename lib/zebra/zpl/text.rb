@@ -13,7 +13,7 @@ module Zebra
       end
 
       def width=(width)
-        if (margin.nil? || margin < 1)
+        unless (margin.nil? || margin < 1)
           @width = (width - (margin*2))
         else
           @width = width || 0
