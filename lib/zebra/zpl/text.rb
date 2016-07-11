@@ -5,7 +5,7 @@ module Zebra
     class Text
       include Printable
 
-      attr_reader   :font_size, :font_type, :width, :margin
+      attr_reader   :font_size, :font_type, :width
 
       def font_size=(f)
         FontSize.validate_font_size f
@@ -23,11 +23,6 @@ module Zebra
 
       def font_type
         @font_type || FontType::TYPE_0
-      end
-
-      def margin=(margin)
-        @margin = margin || 0
-        @x-origin = @margin
       end
 
       def print_mode=(mode)
@@ -67,7 +62,7 @@ module Zebra
         # "^FO25,25^FB600,100,0,C,0^FDFoo^FS"
 
         # "^CF#{font_type},#{font_size}^FO#{x},#{y}^FB609,4,0,#{justification},0^FD#{data}^FS"
-        "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{@margin},#{y}^FB#{(width - (@margin*2))},4,0,#{justification},0^FD#{data}^FS"
+        "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x},#{y}^FB#{width},4,0,#{justification},0^FD#{data}^FS"
       end
 
       private
