@@ -9,7 +9,7 @@ module Zebra
     attr_reader :printer
 
     def initialize(printer)
-      check_existent_printers printer
+      #check_existent_printers printer
 
       @printer = printer
     end
