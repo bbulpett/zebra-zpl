@@ -24,8 +24,8 @@ module Zebra
 
     def check_existent_printers(printer)
       existent_printers = Cups.show_destinations
-      logger.info "EXISTENT PRINTERS: \n"
-      existent_printers.each { |x| logger.info x }
+      puts "EXISTENT PRINTERS: \n"
+      existent_printers.each { |x| puts x }
       raise UnknownPrinter.new(printer) unless existent_printers.include?(printer)
     end
 
