@@ -24,13 +24,10 @@ module Zebra
 
     def check_existent_printers(printer)
       existent_printers = Cups.show_destinations
-      puts "EXISTENT PRINTERS: \n"
-      existent_printers.each { |x| puts x }
       raise UnknownPrinter.new(printer) unless existent_printers.include?(printer)
     end
 
     def send_to_printer(path)
-      # debugger
       puts "* * * * * * * * * * * * Sending file to printer #{@printer} at #{@remote_ip} * * * * * * * * * * "
       `lp -h #{@remote_ip} -d #{@printer} -o raw #{path}`
     end
