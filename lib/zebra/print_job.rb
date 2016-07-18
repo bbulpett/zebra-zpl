@@ -1,10 +1,10 @@
 module Zebra
   class PrintJob
-    class UnknownPrinter < StandardError
-      def initialize(printer)
-        super("Could not find a printer named #{printer}")
-      end
-    end
+    # class UnknownPrinter < StandardError
+    #   def initialize(printer)
+    #     super("Could not find a printer named #{printer}")
+    #   end
+    # end
 
     attr_reader :printer
 
@@ -22,10 +22,10 @@ module Zebra
 
     private
 
-    def check_existent_printers(printer)
-      existent_printers = Cups.show_destinations
-      raise UnknownPrinter.new(printer) unless existent_printers.include?(printer)
-    end
+    # def check_existent_printers(printer)
+    #   existent_printers = Cups.show_destinations
+    #   raise UnknownPrinter.new(printer) unless existent_printers.include?(printer)
+    # end
 
     def send_to_printer(path)
       puts "* * * * * * * * * * * * Sending file to printer #{@printer} at #{@remote_ip} * * * * * * * * * * "
