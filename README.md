@@ -2,6 +2,8 @@
 
 # Zebra::Zpl
 
+### ToDo: Update documentation with instructions for new features such as font sizing, margins, and text alignment
+
 Zebra::Zpl offers a Ruby DSL to design and print labels using the ZPL programming language. 
 
 ## Installation
