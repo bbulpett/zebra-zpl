@@ -151,14 +151,23 @@ You can draw boxes in your labels:
 
 	box = Zebra::Zpl::Box.new :position => [20, 20], :end_position => [100, 100], :line_thickness => 39
 	
-#### Elements rotation
+#### Elements Rotation
 
-All printable elements can be rotated on the label, using the `:rotation` option. The accepted rotation values are:
+All printable elements can be rotated on the label, using the `:Rotation` option. The accepted rotation values are:
 
 * `Zebra::Zpl::Rotation::NO_ROTATION`: will not rotate the element.
 * `Zebra::Zpl::Rotation::DEGREES_90`: will rotate the element 90 degrees.
 * `Zebra::Zpl::Rotation::DEGREES_180`: will rotate the element 180 degrees.
 * `Zebra::Zpl::Rotation::DEGREES_270`: will rotate the element 270 degrees.
+
+#### Elements Justification
+
+There are four ZPL-supported `:Justification` parameters. "LEFT" (left-justified) is the default.
+
+* `Zebra::Zpl::Justification::LEFT` ~ left-justified
+* `Zebra::Zpl::Justification::RIGHT` ~ right-justified
+* `Zebra::Zpl::Justification::CENTER` ~ centered
+* `Zebra::Zpl::Justification::JUSTIFIED` ~ full-width-justifed _(YMMV)_
 
 
 
