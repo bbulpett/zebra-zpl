@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-# require 'lib/zebra/zpl/version'
+require 'lib/zebra/zpl/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "zebra-zpl"
-  spec.version       = '1.0.0'
+  spec.version       = Zebra::Zpl::VERSION
   spec.authors       = ["Barnabas Bulpett"]
   spec.email         = ["barnabasbulpett@gmail.com"]
   spec.description   = %q{Print labels using ZPL2 and Ruby}
