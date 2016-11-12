@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["barnabasbulpett@gmail.com"]
   spec.description   = %q{Print labels using ZPL2 and Ruby}
   spec.summary       = %q{Simple DSL to create labels and send them to a Zebra printer using Ruby, ZPL2 and CUPS}
-  spec.homepage      = "http://github.com/bbulpett/zebra-zpl"
+  spec.homepage      = "https://github.com/bbulpett/zebra-zpl"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
