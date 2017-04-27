@@ -28,11 +28,8 @@ module Zebra
     # end
 
     def send_to_printer(path)
-      puts "Sending job to #{printer} printer on #{remote_ip}"
-      # Try UNIX first
+      puts "* * * * * * * * * * * * Sending file to printer #{@printer} at #{@remote_ip} * * * * * * * * * * "
       `lp -h #{@remote_ip} -d #{@printer} -o raw #{path}`
-    rescue # Must be Windows
-      `lpr -S #{@remote_ip} -P #{@printer} -o raw #{path}`
     end
   end
 end
