@@ -81,7 +81,8 @@ In order to print directly to a LPD on a Windows machine you need two things:
 <img align="center" src="http://i.imgur.com/3CWkEWU.png" style="height: 250px"/>
 <p/>
 
-<hr>
+<hr/>
+
 <a name="fn1">1</a>. On a distro such as Ubuntu simply do: `sudo apt-get install rlpr`  
 If using OSX then you will have to manually build it from source and add it to your `$PATH` environment variable.  
 
