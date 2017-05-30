@@ -43,7 +43,7 @@ You can add as many elements as you want.
 
 ### Printing the labels
 
-You need to have your printer visible to CUPS. Once your printer is configured and you know its name on CUPS, you can send the labels to the printer using a `Zebra::PrintJob` instance.
+You need to have your printer visible to CUPS (or shared on the network in Windows). Once your printer is configured and you know its name on CUPS (or the Windows shared printer name), you can send the labels to the printer using a `Zebra::PrintJob` instance.
 
 	label = Zebra::Zpl::Label.new(
 	  :width         => 200,
@@ -65,7 +65,7 @@ You need to have your printer visible to CUPS. Once your printer is configured a
 
 	label << barcode
 
-	print_job = Zebra::PrintJob.new "your-printer-name-on-cups"
+	print_job = Zebra::PrintJob.new "<your-printer-name-on-cups/windows-shared-printer-name>"
 
 	print_job.print label
 
@@ -74,10 +74,18 @@ This will persist the label contents to a tempfile (using Ruby's tempfile core l
 ### Printing to directly to Windows LPD
 This gem also supports printing directly to shared printer on Windows using LPD.
 In order to print directly to a LPD on a Windows machine you need two things:
-- [rlpr](http://manpages.ubuntu.com/manpages/xenial/man1/rlpr.1.html) installed on the (UNIX) system running your app that uses this gem.
-- LPD Print Service and LPR Port Monitor features enabled on the Windows machine
+- [rlpr](http://manpages.ubuntu.com/manpages/xenial/man1/rlpr.1.html) installed on the (UNIX) system running your app that uses this gem.<sup>[1](#fn1)</sup>
+- LPD Print Service and LPR Port Monitor features enabled on the Windows machine.<sup>[2](#fn2)</sup>
 
-<img src="http://i.imgur.com/3CWkEWU.png" style="height: 300px;"/>
+<p align="center">
+<img align="center" src="http://i.imgur.com/3CWkEWU.png" style="height: 250px"/>
+<p/>
+
+<hr>
+<a name="fn1">1</a>. On a distro such as Ubuntu simply do: `sudo apt-get install rlpr`  
+If using OSX then you will have to manually build it from source and add it to your `$PATH` environment variable.  
+
+<a name="fn2">2</a>. The printer name that you pass in must correspond with the **shared printer name** on the Windows machine.
 
 ### Printing QR codes
 
