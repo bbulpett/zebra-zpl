@@ -5,7 +5,7 @@ module Zebra
     class Text
       include Printable
 
-      attr_reader   :font_size, :font_type, :width
+      attr_reader :font_size, :font_type, :width
 
       def font_size=(f)
         FontSize.validate_font_size f
