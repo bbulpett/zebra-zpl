@@ -162,6 +162,10 @@ You can create QR Codes elements to print using instances of the `Zebra::Zpl::Qr
 * `scale factor`: Crucial variable of the QR codes's size. Accepted values: 1-99.
 * `error correction level`: Algorithm enables reading damaged QR codes. There are four error correction levels: L - 7% of codewords can be restored, M - 15% can be restored, Q - 25% can be restored, H - 30% can be restored.
 
+### Images
+
+See the `Zebra::Zpl::Raw` section.
+
 #### Boxes
 
 You can draw boxes in your labels:
@@ -185,6 +189,17 @@ There are four ZPL-supported `:Justification` parameters. "LEFT" (left-justified
 * `Zebra::Zpl::Justification::RIGHT` ~ right-justified
 * `Zebra::Zpl::Justification::CENTER` ~ centered
 * `Zebra::Zpl::Justification::JUSTIFIED` ~ full-width-justifed _(YMMV)_
+
+### Raw ZPL
+
+Raw ZPL can be inserted using the `Zebra::Zpl::Raw` instance. This covers most instances that have yet to be implemented in this gem; including images.
+
+An image must be encode in ZPL with the ^GFA tag surrounding it
+
+The Raw ZPL instance only takes the following options:
+* `position`: An array with the coordinates to place the text, in dots.
+* `data`: The text to be printed.
+* `Justification`: Alignment of data
 
 
 
