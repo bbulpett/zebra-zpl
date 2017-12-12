@@ -36,7 +36,7 @@ module Zebra
       end
 
       def <<(element)
-        element.width = self.width
+        element.width = self.width if element.width.nil?
         elements << element
       end
 
