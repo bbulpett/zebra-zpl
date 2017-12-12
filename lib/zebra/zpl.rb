@@ -1,4 +1,3 @@
-require 'cups'
 require 'tempfile'
 require 'zebra/zpl/version'
 require 'zebra/zpl/language'
