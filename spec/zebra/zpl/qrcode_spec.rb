@@ -71,31 +71,31 @@ describe Zebra::Zpl::Qrcode do
       end  
 
       it "begins with the command 'b'" do
-        qrcode.to_zpl.should =~ /\Ab/
+        expect(qrcode.to_zpl).to match(/\Ab/)
       end 
 
       it "contains the X position" do
-        tokens[0].match(/b(\d+)/)[1].should eq "50"
+        expect(tokens[0].match(/b(\d+)/)[1]).to eq "50"
       end
 
       it "contains the Y position" do
-        tokens[1].should eq "50"
+        expect(tokens[1]).to eq "50"
       end
 
       it "contains QR code type" do
-        tokens[2].should eq "Q"
+        expect(tokens[2]).to eq "Q"
       end
 
       it "contains the scale factor" do
-        tokens[3].should eq "s3"
+        expect(tokens[3]).to eq "s3"
       end
 
       it "contains the error correction level" do
-        tokens[4].should eq "eM"
+        expect(tokens[4]).to eq "eM"
       end
 
       it "contains the data to be printed in the qrcode" do
-        tokens[5].should eq "\"foobar\""
+        expect(tokens[5]).to eq "\"foobar\""
       end
   end
 end

@@ -33,7 +33,6 @@ module Zebra
 
       def to_zpl
         check_attributes
-        # "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
         "^FO#{x},#{y}#{'^FR' if reverse_type}^GB#{box_width},#{box_height},#{line_thickness}^FS"
       end
 
