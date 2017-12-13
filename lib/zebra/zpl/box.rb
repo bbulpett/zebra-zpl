@@ -7,30 +7,33 @@ module Zebra
 
       class InvalidLineThickness < StandardError; end
 
-      attr_reader :line_thickness, :box_width, :box_height, :width
+      attr_reader :line_thickness, :box_width, :box_height, :width, :reverse_type
 
       def line_thickness=(thickness)
         raise InvalidLineThickness unless thickness.nil? || thickness.to_i.to_s == thickness.to_s
         @line_thickness = thickness
       end
 
-      def box_width=(width)
-        @box_width = width
+      def box_width=(value)
+        @box_width = value
       end
 
       ### The method below refers to the "label width"
-      def width=(width)
-        @width = width || 0
+      def width=(value)
+        @width = value || 0
       end
 
-      def box_height=(height)
-        @box_height = height
+      def box_height=(value)
+        @box_height = value
+      end
+
+      def reverse_type=(value)
+        @reverse_type = value
       end
 
       def to_zpl
         check_attributes
-        # "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
-        "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
+        "^FO#{x},#{y}#{'^FR' if reverse_type}^GB#{box_width},#{box_height},#{line_thickness}^FS"
       end
 
       private

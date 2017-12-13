@@ -31,6 +31,10 @@ module Zebra
         @wide_bar_width = width
       end
 
+      def wide_narrow_ratio
+        wide_bar_width / narrow_bar_width
+      end
+
       def print_human_readable_code
         @print_human_readable_code || false
       end
@@ -38,7 +42,7 @@ module Zebra
       def to_zpl
         check_attributes
         human_readable = print_human_readable_code ? "Y" : "N"
-        "^FW#{rotation}^FO#{x},#{y}^BY#{narrow_bar_width}^B#{type}#{rotation},#{height},#{human_readable}^FD#{data}^FS"
+        "^FW#{rotation}^FO#{x},#{y}^BY#{narrow_bar_width},#{wide_narrow_ratio}^B#{type}#{rotation},N,#{height},#{human_readable}^FD#{data}^FS"
       end
 
       private

@@ -22,12 +22,12 @@ module Zebra
       end
 
       def print_speed=(s)
-        raise InvalidPrintSpeedError unless (0..6).include?(s)
+        raise InvalidPrintSpeedError unless (0..15).include?(s)
         @print_speed = s
       end
 
       def print_density=(d)
-        raise InvalidPrintDensityError unless (0..6).include?(d)
+        raise InvalidPrintDensityError unless (0..15).include?(d)
         @print_density = d
       end
 
@@ -36,7 +36,7 @@ module Zebra
       end
 
       def <<(element)
-        element.width = self.width
+        element.width = self.width if element.width.nil?
         elements << element
       end
 

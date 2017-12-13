@@ -4,45 +4,27 @@ require 'spec_helper'
 describe Zebra::Zpl::Text do
   it "can be initialized with the position of the text to be printed" do
     text = described_class.new :position => [20, 40]
-    text.position.should == [20,40]
-    text.x.should == 20
-    text.y.should == 40
+    expect(text.position).to eq([20,40])
+    expect(text.x).to eq(20)
+    expect(text.y).to eq(40)
   end
 
   it "can be initialized with the text rotation" do
     rotation = Zebra::Zpl::Rotation::DEGREES_90
     text = described_class.new :rotation => rotation
-    text.rotation.should == rotation
+    expect(text.rotation).to eq(rotation)
   end
 
   it "can be initialized with the font_size to be used" do
     font_size = Zebra::Zpl::FontSize::SIZE_1
     text = described_class.new :font_size => font_size
-    text.font_size.should == font_size
-  end
-
-  it "can be initialized with the horizontal multiplier" do
-    multiplier = Zebra::Zpl::HorizontalMultiplier::VALUE_1
-    text = described_class.new :h_multiplier => multiplier
-    text.h_multiplier.should == multiplier
-  end
-
-  it "can be initialized with the vertical multiplier" do
-    multiplier = Zebra::Zpl::VerticalMultiplier::VALUE_1
-    text = described_class.new :v_multiplier => multiplier
-    text.v_multiplier.should == multiplier
+    expect(text.font_size).to eq(font_size)
   end
 
   it "can be initialized with the data to be printed" do
     data = "foobar"
     text = described_class.new :data => data
-    text.data.should == data
-  end
-
-  it "can be initialized with the printing mode" do
-    print_mode = Zebra::Zpl::PrintMode::REVERSE
-    text = described_class.new :print_mode => print_mode
-    text.print_mode.should == print_mode
+    expect(text.data).to eq(data)
   end
 
   describe "#rotation=" do
@@ -58,30 +40,6 @@ describe Zebra::Zpl::Text do
       expect {
         described_class.new.font_size = 6
       }.to raise_error(Zebra::Zpl::FontSize::InvalidFontSizeError)
-    end
-  end
-
-  describe "#h_multiplier=" do
-    it "raises an error if the received multiplier is invalid" do
-      expect {
-        described_class.new.h_multiplier = 9
-      }.to raise_error(Zebra::Zpl::HorizontalMultiplier::InvalidMultiplierError)
-    end
-  end
-
-  describe "#v_multiplier=" do
-    it "raises an error if the received multiplier is invalid" do
-      expect {
-        described_class.new.v_multiplier = 10
-      }.to raise_error(Zebra::Zpl::VerticalMultiplier::InvalidMultiplierError)
-    end
-  end
-
-  describe "#print_mode=" do
-    it "raises an error if the received print mode is invalid" do
-      expect {
-        described_class.new.print_mode = "foo"
-      }.to raise_error(Zebra::Zpl::PrintMode::InvalidPrintModeError)
     end
   end
 
@@ -117,23 +75,12 @@ describe Zebra::Zpl::Text do
     end
 
     it "begins width the 'A' command" do
-      text.to_zpl.should =~ /\AA/
-    end
-
-    it "assumes 1 as the default horizontal multipler" do
-      text.to_zpl.split(",")[4].to_i.should == Zebra::Zpl::HorizontalMultiplier::VALUE_1
-    end
-
-    it "assumes 1 as the default vertical multiplier" do
-      text.to_zpl.split(",")[5].to_i.should == Zebra::Zpl::VerticalMultiplier::VALUE_1
-    end
-
-    it "assumes the normal print mode as the default" do
-      text.to_zpl.split(",")[6].should == Zebra::Zpl::PrintMode::NORMAL
+      expect(text.to_zpl).to match(/\^FWN/)
     end
 
     it "assumes no rotation by default" do
-      text.to_zpl.split(",")[2].to_i.should == Zebra::Zpl::Rotation::NO_ROTATION
+      puts text.to_zpl.split(",")[0]
+      expect(text.to_zpl.split(",")[0]).to eq("^FW#{Zebra::Zpl::Rotation::NO_ROTATION}^CF0")
     end
   end
 end
