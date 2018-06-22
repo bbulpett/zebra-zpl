@@ -10,6 +10,10 @@ module Zebra
 
       attr_reader :scale_factor, :correction_level
 
+      def width=(width)
+        @width = width || 0
+      end
+
       def scale_factor=(value)
         raise InvalidScaleFactorError unless (1..99).include?(value.to_i)
         @scale_factor = value
