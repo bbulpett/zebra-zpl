@@ -6,6 +6,7 @@ module Zebra
       include Printable
 
       class InvalidLineThickness < StandardError; end
+      class InvalidColorError < StandardError; end
 
       attr_reader :line_thickness, :diameter, :color
 
