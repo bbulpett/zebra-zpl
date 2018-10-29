@@ -7,7 +7,7 @@ module Zebra
 
       class InvalidMaxLinesError < StandardError; end
 
-      attr_reader :font_size, :font_type, :width, :max_lines, :line_spacing, :hanging_indent
+      attr_reader :font_size, :font_type, :width, :line_spacing, :hanging_indent
 
       def font_size=(f)
         FontSize.validate_font_size f
@@ -24,7 +24,7 @@ module Zebra
 
       def max_lines=(value)
         raise InvalidMaxLinesError unless value.to_i >= 1
-        @max_lines = value || 4
+        @max_lines = value
       end
 
       def line_spacing=(value)
@@ -63,6 +63,10 @@ module Zebra
 
       def print_mode
         @print_mode || PrintMode::NORMAL
+      end
+
+      def max_lines
+        @max_lines || 4
       end
 
       def h_multiplier=(multiplier)
