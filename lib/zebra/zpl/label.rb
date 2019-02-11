@@ -36,7 +36,7 @@ module Zebra
       end
 
       def <<(element)
-        element.width = self.width unless element.width.present?
+        element.width = self.width if element.respond_to?("width=") 
         elements << element
       end
 
