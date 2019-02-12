@@ -5,7 +5,9 @@ module Zebra
     class Text
       include Printable
 
-      attr_reader :font_size, :font_type, :width
+      class InvalidMaxLinesError < StandardError; end
+
+      attr_reader :font_size, :font_type, :width, :line_spacing, :hanging_indent
 
       def font_size=(f)
         FontSize.validate_font_size f
@@ -18,6 +20,19 @@ module Zebra
         else
           @width = width || 0
         end
+      end
+
+      def max_lines=(value)
+        raise InvalidMaxLinesError unless value.to_i >= 1
+        @max_lines = value
+      end
+
+      def line_spacing=(value)
+        @line_spacing = value || 0
+      end
+
+      def hanging_indent=(value)
+        @hanging_indent = value || 0
       end
 
       def font_type=(type)
@@ -50,6 +65,10 @@ module Zebra
         @print_mode || PrintMode::NORMAL
       end
 
+      def max_lines
+        @max_lines || 4
+      end
+
       def h_multiplier=(multiplier)
         HorizontalMultiplier.validate_multiplier multiplier
         @h_multiplier = multiplier
@@ -66,7 +85,7 @@ module Zebra
         # "^FO25,25^FB600,100,0,C,0^FDFoo^FS"
 
         # "^CF#{font_type},#{font_size}^FO#{x},#{y}^FB609,4,0,#{justification},0^FD#{data}^FS"
-        "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x},#{y}^FB#{width},4,0,#{justification},0^FD#{data}^FS"
+        "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x},#{y}^FB#{width},#{max_lines},#{line_spacing},#{justification},#{hanging_indent}^FD#{data}^FS"
       end
 
       private
