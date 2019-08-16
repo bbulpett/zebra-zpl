@@ -27,7 +27,7 @@ module Zebra
       end
 
       def print_density=(d)
-        raise InvalidPrintDensityError unless (0..6).include?(d)
+        raise InvalidPrintDensityError unless (0..15).include?(d)
         @print_density = d
       end
 
@@ -36,7 +36,7 @@ module Zebra
       end
 
       def <<(element)
-        element.width = self.width
+        element.width = self.width if element.respond_to?("width=") && !element.width.present?
         elements << element
       end
 
