@@ -43,7 +43,7 @@ module Zebra
 
       def check_attributes
         super
-        raise InvalidRowColumnNumberError if @row_number.present? && @column_number.present? && @row_number.to_i * @column_number.to_i > 928
+        raise InvalidRowColumnNumberError if !@row_number.nil? && !@column_number.nil? && @row_number.to_i * @column_number.to_i > 928
       end
     end
   end

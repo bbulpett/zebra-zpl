@@ -16,11 +16,11 @@ module Zebra
       end
 
       def diameter=(value)
-        @diameter= value
+        @diameter = value
       end
 
       def color=(value)
-        raise InvalidColorError unless value&.upcase.in?(["B","W"])
+        raise InvalidColorError unless %w[B W].include?(value&.upcase)
         @color = value
       end
 
