@@ -31,7 +31,7 @@ module Zebra
       end
 
       def <<(element)
-        element.width = self.width
+        element.width = self.width if element.respond_to?("width=") && !element.width.nil?
         elements << element
       end
 
@@ -70,7 +70,6 @@ module Zebra
       end
 
       def persist
-        # debugger
         tempfile = Tempfile.new "zebra_label"
         dump_contents tempfile
         tempfile.close
