@@ -31,11 +31,10 @@ You create new labels with an instance of the `Zebra::Zpl::Label` class. It acce
 * `length`: The label's length, is dots.
 * `gap`: The gap between labels, in dots.
 * `print_speed`: The print speed to be used. You can use values between 0 and 6. This option is required.
-* `print_density`: The print density to be used. You can use values between 0 and 15. This option is required.
 
 With a label, you can start adding elements to it:
 
-	label = Zebra::Zpl::Label.new :print_density => 8, :print_speed => 3
+	label = Zebra::Zpl::Label.new :print_speed => 3
 	text  = Zebra::Zpl::Text.new :data => "Hello, printer!", :position => [100, 100], :font_size => Zebra::Zpl::FontSize::SIZE_2
 	label << text
 
@@ -48,8 +47,7 @@ You need to have your printer visible to CUPS (or shared on the network in Windo
 	label = Zebra::Zpl::Label.new(
 	  :width         => 200,
 	  :length        => 200,
-	  :print_speed   => 3,
-	  :print_density => 6
+	  :print_speed   => 3
 	)
 
 
@@ -93,8 +91,7 @@ If using OSX then you will have to manually build it from source and add it to y
     label = Zebra::Zpl::Label.new(
       :width=>350,
       :length=>250,
-      :print_speed=>3,
-      :print_density=>6
+      :print_speed=>3
     )
 
     qrcode = Zebra::Zpl::Qrcode.new(

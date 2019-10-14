@@ -9,7 +9,7 @@ module Zebra
 
       attr_writer :copies
       attr_reader :elements, :tempfile
-      attr_accessor :width, :length, :gap, :print_speed, :print_density
+      attr_accessor :width, :length, :gap, :print_speed
 
       def initialize(options = {})
         options.each_pair { |key, value| self.__send__("#{key}=", value) if self.respond_to?("#{key}=") }
@@ -24,11 +24,6 @@ module Zebra
       def print_speed=(s)
         raise InvalidPrintSpeedError unless (0..6).include?(s)
         @print_speed = s
-      end
-
-      def print_density=(d)
-        raise InvalidPrintDensityError unless (0..15).include?(d)
-        @print_density = d
       end
 
       def copies
