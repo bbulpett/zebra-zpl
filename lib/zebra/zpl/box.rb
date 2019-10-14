@@ -5,9 +5,11 @@ module Zebra
     class Box
       include Printable
 
-      class InvalidLineThickness < StandardError; end
+      class InvalidLineThickness  < StandardError; end
+      class InvalidRoundingDegree < StandardError; end
+      class InvalidColorError     < StandardError; end
 
-      attr_reader :line_thickness, :box_width, :box_height, :width
+      attr_reader :line_thickness, :box_width, :box_height, :width, :color, :rounding_degree
 
       def line_thickness=(thickness)
         raise InvalidLineThickness unless thickness.nil? || thickness.to_i.to_s == thickness.to_s
@@ -27,10 +29,19 @@ module Zebra
         @box_height = height
       end
 
+      def rounding_degree=(value)
+        raise InvalidLineThickness unless value.to_i.in? (0..8)
+        @rounding_degree = value
+      end
+
+      def color=(value)
+        raise InvalidColorError unless value.upcase.in?(["W","B"])
+        @color = value
+      end
+
       def to_zpl
         check_attributes
-        # "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
-        "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness}^FS"
+        "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness},#{color},#{rounding_degree}^FS"
       end
 
       private
