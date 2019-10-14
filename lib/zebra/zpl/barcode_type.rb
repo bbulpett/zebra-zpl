@@ -11,8 +11,6 @@ module Zebra
       CODE_AZTEC_PARAMS   = "O"
       CODE_UPS_MAXICODE   = "D"
       CODE_QR             = "Q"
-      CODE_UPCA           = "U"
-      CODE_EAN13          = "E"
 
       # Legacy (EPL) bar code suffixes
       # CODE_39             = "3"
@@ -25,7 +23,7 @@ module Zebra
       # CODABAR             = "K"
 
       def self.valid_barcode_type?(type)
-        %w(3 A C K 0 O D Q U E).include? type
+        %w(3 A C K 0 O D Q).include? type
       end
 
       def self.validate_barcode_type(type)
