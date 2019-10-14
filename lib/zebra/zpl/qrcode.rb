@@ -8,7 +8,7 @@ module Zebra
       class InvalidScaleFactorError < StandardError; end
       class InvalidCorrectionLevelError < StandardError; end
 
-      attr_reader :scale_factor, :correction_level
+      attr_reader :scale_factor, :correction_level, :width
 
       def width=(width)
         @width = width || 0
