@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Zebra::Zpl::PDF417 do
-    it "can be initialized with row height" do 
+    it "can be initialized with row height" do
       pdf417 = described_class.new :row_height => 3
-      expect(pd417.row_height).to eq 3
-    end 
+      expect(pdf417.row_height).to eq 3
+    end
 
     it "can be initialized with the security level" do
       pdf417 = described_class.new :security_level => 1
@@ -36,7 +36,7 @@ describe Zebra::Zpl::PDF417 do
       it "raises an error if the row number is not within the range 3-90" do
         expect{described_class.new :row_number=>95}.to raise_error(Zebra::Zpl::PDF417::InvalidRowColumnNumberError)
       end
-    end 
+    end
 
     describe "#to_zpl" do
       let(:valid_attributes) { {
@@ -64,14 +64,14 @@ describe Zebra::Zpl::PDF417 do
         expect {
           pdf417.to_zpl
         }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
-      end      
+      end
 
       it "raises an error if the data to be printed was not informed" do
         pdf417.data = nil
         expect {
-          pd417.to_zpl
+          pdf417.to_zpl
         }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the data to be printed is not given")
-      end  
+      end
 
       it "contains the X position" do
         tokens[0].match(/FO(\d+)/)[1].should eq "50"
