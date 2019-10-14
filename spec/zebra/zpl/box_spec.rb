@@ -20,7 +20,9 @@ describe Zebra::Zpl::Box do
       position: [20,40],
       line_thickness: 3,
       box_width: 5,
-      box_height: 4
+      box_height: 4,
+      color: 'B',
+      rounding_degree: 6
     }}
 
     it "raises an error if the X position was not informed" do
@@ -59,7 +61,7 @@ describe Zebra::Zpl::Box do
     end
 
     it "contains the attributes in correct order" do
-      expect(box.to_zpl).to eq '^FO20,40^GB5,4,3^FS'
+      expect(box.to_zpl).to eq '^FO20,40^GB5,4,3,B,6^FS'
     end
   end
 end
