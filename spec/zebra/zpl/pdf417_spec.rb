@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Zebra::Zpl::PDF417 do
-    it "can be initialized with row height" do 
+    it "can be initialized with row height" do
       pdf417 = described_class.new :row_height => 3
-      expect(pd417.row_height).to eq 3
-    end 
+      expect(pdf417.row_height).to eq 3
+    end
 
     it "can be initialized with the security level" do
       pdf417 = described_class.new :security_level => 1
@@ -36,7 +36,7 @@ describe Zebra::Zpl::PDF417 do
       it "raises an error if the row number is not within the range 3-90" do
         expect{described_class.new :row_number=>95}.to raise_error(Zebra::Zpl::PDF417::InvalidRowColumnNumberError)
       end
-    end 
+    end
 
     describe "#to_zpl" do
       let(:valid_attributes) { {
@@ -64,45 +64,45 @@ describe Zebra::Zpl::PDF417 do
         expect {
           pdf417.to_zpl
         }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
-      end      
+      end
 
       it "raises an error if the data to be printed was not informed" do
         pdf417.data = nil
         expect {
-          pd417.to_zpl
+          pdf417.to_zpl
         }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the data to be printed is not given")
-      end  
+      end
 
       it "contains the X position" do
-        tokens[0].match(/FO(\d+)/)[1].should eq "50"
+        expect(tokens[0].match(/FO(\d+)/)[1]).to eq "50"
       end
 
       it "contains the Y position" do
-        tokens[1].match(/(\d+)\^/)[1].should eq "50"
+        expect(tokens[1].match(/(\d+)\^/)[1]).to eq "50"
       end
 
       it "contains the row height" do
-        tokens[2].should eq "5"
+        expect(tokens[2]).to eq "5"
       end
 
       it "contains the security level" do
-        tokens[3].should eq "5"
+        expect(tokens[3]).to eq "5"
       end
 
       it "contains the column number" do
-        tokens[4].should eq "15"
+        expect(tokens[4]).to eq "15"
       end
 
       it "contains the row number" do
-        tokens[5].should eq "30"
+        expect(tokens[5]).to eq "30"
       end
 
       it "contains the trucate option" do
-        tokens[6].match(/(\w) \^/)[1].should eq "N"
+        expect(tokens[6].match(/(\w) \^/)[1]).to eq "N"
       end
 
       it "contains the data to be printed in the pdf417 barcode" do
-        tokens[6].include?("Do away with it!").should eq true
+        expect(tokens[6].include?("Do away with it!")).to eq true
       end
   end
 end

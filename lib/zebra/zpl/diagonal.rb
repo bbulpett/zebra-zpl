@@ -2,14 +2,14 @@ require "zebra/zpl/printable"
 
 module Zebra
   module Zpl
-    class Box
+    class Diagonal
       include Printable
 
-      class InvalidLineThickness  < StandardError; end
-      class InvalidRoundingDegree < StandardError; end
-      class InvalidColorError     < StandardError; end
+      class InvalidLineThickness < StandardError; end
+      class InvalidColorError < StandardError; end
+      class InvalidOrientationError < StandardError; end
 
-      attr_reader :line_thickness, :box_width, :box_height, :width, :color, :rounding_degree
+      attr_reader :line_thickness, :box_width, :box_height, :color, :orientation
 
       def line_thickness=(thickness)
         raise InvalidLineThickness unless thickness.nil? || thickness.to_i.to_s == thickness.to_s
@@ -20,18 +20,8 @@ module Zebra
         @box_width = width
       end
 
-      ### The method below refers to the "label width"
-      def width=(width)
-        @width = width || 0
-      end
-
       def box_height=(height)
         @box_height = height
-      end
-
-      def rounding_degree=(value)
-        raise InvalidLineThickness unless (1..8).include?(value.to_i)
-        @rounding_degree = value
       end
 
       def color=(value)
@@ -39,9 +29,14 @@ module Zebra
         @color = value
       end
 
+      def orientation=(value)
+        raise InvalidOrientationError unless %w[R L].include?(value&.upcase)
+        @orientation = value
+      end
+
       def to_zpl
         check_attributes
-        "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness},#{color},#{rounding_degree}^FS"
+        "^FO#{x},#{y}^GD#{box_width},#{box_height},#{line_thickness},#{color},#{orientation}^FS"
       end
 
       private
@@ -52,7 +47,6 @@ module Zebra
 
       def check_attributes
         super
-        raise MissingAttributeError.new("the line thickness is not given") unless line_thickness
         raise MissingAttributeError.new("the box_width is not given") unless box_width
         raise MissingAttributeError.new("the box_height is not given") unless box_height
       end
