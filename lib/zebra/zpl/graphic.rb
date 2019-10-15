@@ -56,7 +56,7 @@ module Zebra
         check_attributes
         zpl = case graphic_type 
         when "B"
-            "D#{graphic_width},#{graphic_height},#{line_thickness},#{color},#{orientation}"
+            "B#{graphic_width},#{graphic_height},#{line_thickness},#{color},#{orientation}"
         when "E"
             "E#{graphic_width},#{graphic_height},#{line_thickness},#{color}"
         when "C"
