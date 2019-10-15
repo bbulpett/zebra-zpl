@@ -14,10 +14,6 @@ module Zebra
         @font_size = f
       end
 
-      def bold=(value)
-        @bold = value
-      end
-
       def width=(width)
         unless (margin.nil? || margin < 1)
           @width = (width - (margin*2))
@@ -85,6 +81,10 @@ module Zebra
 
       def to_zpl
         check_attributes
+        # ["A#{x}", y, rotation, font_size, h_multiplier, v_multiplier, print_mode, "\"#{data}\""].join(",")	
+        # "^FO25,25^FB600,100,0,C,0^FDFoo^FS"	
+
+        # "^CF#{font_type},#{font_size}^FO#{x},#{y}^FB609,4,0,#{justification},0^FD#{data}^FS"
         "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x},#{y}^FB#{width},#{max_lines},#{line_spacing},#{justification},#{hanging_indent}^FD#{data}^FS"
       end
 
