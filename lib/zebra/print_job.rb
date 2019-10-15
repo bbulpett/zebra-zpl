@@ -16,7 +16,13 @@ module Zebra
 
     def print(label, ip)
       @remote_ip = ip
-      tempfile = label.persist
+      if label.is_a? String
+        tempfile = Tempfile.new "zebra_label"
+        tempfile.write label
+        tempfile.close
+      else
+        tempfile = label.persist
+      end
       send_to_printer tempfile.path
     end
 
