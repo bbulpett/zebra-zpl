@@ -7,7 +7,7 @@ module Zebra
 
       class InvalidMaxLinesError < StandardError; end
 
-      attr_reader :font_size, :font_type, :width, :line_spacing, :hanging_indent, :bold
+      attr_reader :font_size, :font_type, :width, :line_spacing, :hanging_indent
 
       def font_size=(f)
         FontSize.validate_font_size f
@@ -86,10 +86,6 @@ module Zebra
       def to_zpl
         check_attributes
         "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x},#{y}^FB#{width},#{max_lines},#{line_spacing},#{justification},#{hanging_indent}^FD#{data}^FS"
-        if bold.present?
-          zpl += "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x+2},#{y}^FB#{width},#{max_lines},#{line_spacing},#{justification},#{hanging_indent}^FD#{data}^FS" 
-          zpl += "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x},#{y+2}^FB#{width},#{max_lines},#{line_spacing},#{justification},#{hanging_indent}^FD#{data}^FS"
-        end
       end
 
       private
