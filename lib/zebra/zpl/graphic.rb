@@ -43,12 +43,12 @@ module Zebra
       end
 
       def color=(value)
-        raise InvalidColorError unless value&.upcase.in?(["B","W"])
+        raise InvalidColorError unless %w[R L].include?(value&.upcase)
         @color = value
       end
 
       def orientation=(value)
-        raise InvalidOrientationError unless value&.upcase.in?(["R","L"])
+        raise InvalidOrientationError unless %w[R L].include?(value&.upcase)
         @orientation = value
       end
 
