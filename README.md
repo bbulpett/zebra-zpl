@@ -116,8 +116,6 @@ You create text elements to print using instances of the `Zebra::Zpl::Text` clas
 * `position`: An array with the coordinates to place the text, in dots.
 * `rotation`: The rotation for the text. More about the possible values below.
 * `data`: The text to be printed.
-* `v_multiplier`: The vertical multiplier to use.
-* `h_multiplier`: The horizontal multipler to use.
 * `print_mode`: The print mode. Can be normal ("N") or reverse ("R").
 * `font_size`: The font size to use. You can use values between 1 and 5.
 
