@@ -74,35 +74,35 @@ describe Zebra::Zpl::PDF417 do
       end
 
       it "contains the X position" do
-        tokens[0].match(/FO(\d+)/)[1].should eq "50"
+        expect(tokens[0].match(/FO(\d+)/)[1]).to eq "50"
       end
 
       it "contains the Y position" do
-        tokens[1].match(/(\d+)\^/)[1].should eq "50"
+        expect(tokens[1].match(/(\d+)\^/)[1]).to eq "50"
       end
 
       it "contains the row height" do
-        tokens[2].should eq "5"
+        expect(tokens[2]).to eq "5"
       end
 
       it "contains the security level" do
-        tokens[3].should eq "5"
+        expect(tokens[3]).to eq "5"
       end
 
       it "contains the column number" do
-        tokens[4].should eq "15"
+        expect(tokens[4]).to eq "15"
       end
 
       it "contains the row number" do
-        tokens[5].should eq "30"
+        expect(tokens[5]).to eq "30"
       end
 
       it "contains the trucate option" do
-        tokens[6].match(/(\w) \^/)[1].should eq "N"
+        expect(tokens[6].match(/(\w) \^/)[1]).to eq "N"
       end
 
       it "contains the data to be printed in the pdf417 barcode" do
-        tokens[6].include?("Do away with it!").should eq true
+        expect(tokens[6].include?("Do away with it!")).to eq true
       end
   end
 end

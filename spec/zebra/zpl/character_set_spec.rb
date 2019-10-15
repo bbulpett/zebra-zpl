@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Zebra::Zpl::CharacterSet do
   it "can be initialized with the number of data bits" do
     character_set = described_class.new :number_of_data_bits => 8
-    character_set.number_of_data_bits.should == 8
+    expect(character_set.number_of_data_bits).to eq 8
   end
 
   it "raises an error when receiving an invalid number of data bits" do
@@ -14,7 +14,7 @@ describe Zebra::Zpl::CharacterSet do
 
   it "can be initialized with the language" do
     character_set = described_class.new :language => Zebra::Zpl::Language::PORTUGUESE
-    character_set.language.should == Zebra::Zpl::Language::PORTUGUESE
+    expect(character_set.language).to eq Zebra::Zpl::Language::PORTUGUESE
   end
 
   it "raises an error with an invalid language" do
@@ -25,7 +25,7 @@ describe Zebra::Zpl::CharacterSet do
 
   it "can be initialized with the country code" do
     character_set = described_class.new :country_code => Zebra::Zpl::CountryCode::LATIN_AMERICA
-    character_set.country_code.should == Zebra::Zpl::CountryCode::LATIN_AMERICA
+    expect(character_set.country_code).to eq Zebra::Zpl::CountryCode::LATIN_AMERICA
   end
 
   it "raises an error with an invalid country code" do
@@ -82,19 +82,19 @@ describe Zebra::Zpl::CharacterSet do
     end
 
     it "begins with the command 'I'" do
-      character_set.to_zpl.should =~ /\AI/
+      expect(character_set.to_zpl).to match /\AI/
     end
 
     it "contains the number of data bits" do
-      tokens[0].match(/I(\d)/)[1].should == "8"
+      expect(tokens[0].match(/I(\d)/)[1]).to eq "8"
     end
 
     it "contains the language" do
-      tokens[1].should == Zebra::Zpl::Language::PORTUGUESE
+      expect(tokens[1]).to eq Zebra::Zpl::Language::PORTUGUESE
     end
 
     it "contains the country code" do
-      tokens[2].should == Zebra::Zpl::CountryCode::LATIN_AMERICA
+      expect(tokens[2]).to eq Zebra::Zpl::CountryCode::LATIN_AMERICA
     end
   end
 end

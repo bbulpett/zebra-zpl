@@ -11,7 +11,7 @@ describe Zebra::PrintJob do
 
     subject(:print_job) { described_class.new "Zebra" }
 
-    before { print_job.stub(:` => true) }
+    before { allow(print_job).to receive(:`) { true } }
 
     it "creates a cups print job with the correct arguments" do
       print_job.print label, ip
