@@ -228,7 +228,7 @@ There are four ZPL-supported `:Justification` parameters. "LEFT" (left-justified
 * `Zebra::Zpl::Justification::CENTER` ~ centered
 * `Zebra::Zpl::Justification::JUSTIFIED` ~ full-width-justifed _(YMMV)_
 
-### Contributing
+## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
 
