@@ -7,7 +7,7 @@ Also check any [open pull requests](https://github.com/bbulpett/zebra-zpl/pulls)
 
 ```
 git clone git@github.com:<your-username>/zebra-zpl.git
-cd img2zpl
+cd zebra-zpl
 git remote add upstream git@github.com:bbulpett/zebra-zpl.git
 bundle install
 ```
