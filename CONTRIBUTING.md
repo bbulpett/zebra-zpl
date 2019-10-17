@@ -29,6 +29,10 @@ This project uses `rspec`. After writing your tests, you can run tests with the 
 
 Write your code to make your tests pass.
 
+### Update the CHANGELOG with a description and your name
+
+Update `CHANGELOG.md` with the description of your code changes and your name on the line after `"* Your contribution here"`.
+
 ### Commit & Push your changes
 
 Commit and push your changes to your working branch.

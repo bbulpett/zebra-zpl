@@ -230,7 +230,9 @@ There are four ZPL-supported `:Justification` parameters. "LEFT" (left-justified
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md)
+See [CONTRIBUTING.md](CONTRIBUTING.md) on how to contribute to this project.
+
+See [CHANGELOG.md](CHANGELOG.md) for a list of changes by version as well as all the awesome people who have contributed to the project.
 
 ## References
 
