@@ -1,6 +1,7 @@
 ### 1.1.0 (next)
 
 * Your contribution here.
+* [#45](https://github.com/bbulpett/zebra-zpl/pull/45): Add CHANGELOG & update README - [@mtking2](https://github.com/mtking2)
 * [#44](https://github.com/bbulpett/zebra-zpl/pull/44): Update README & add more docs - [@mtking2](https://github.com/mtking2)
 * [#40](https://github.com/bbulpett/zebra-zpl/pull/40): Bold Text - [@LagTag](https://github.com/LagTag)
 * [#39](https://github.com/bbulpett/zebra-zpl/pull/39): Fix specs + minor maintenance - [@mtking2](https://github.com/mtking2)
