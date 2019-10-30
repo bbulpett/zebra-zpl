@@ -87,6 +87,7 @@ describe Zebra::Zpl::Text do
 
   describe "#to_zpl" do
     subject(:text) { described_class.new position: [100, 150], font_size: Zebra::Zpl::FontSize::SIZE_3, data: "foobar" }
+    subject(:text_bold) { described_class.new position: [100, 150], font_size: Zebra::Zpl::FontSize::SIZE_3, bold: true, data: "foobar" }
     subject(:tokens) { text.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
 
     it "raises an error if the X position was not informed" do
@@ -123,6 +124,10 @@ describe Zebra::Zpl::Text do
 
     it "contains the attributes in correct order" do
       expect(text.to_zpl).to eq '^FWN^CF0,28^CI28^FO100,150^FB,4,,L,^FDfoobar^FS'
+    end
+
+    it "contains the properly duplicated attributes in correct order for bold text" do
+      expect(text_bold.to_zpl).to eq '^FWN^CF0,28^CI28^FO102,150^FB,4,,L,^FDfoobar^FS^FWN^CF0,28^CI28^FO100,152^FB,4,,L,^FDfoobar^FS'
     end
 
     # it "assumes 1 as the default horizontal multipler" do
