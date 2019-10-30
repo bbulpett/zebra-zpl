@@ -15,6 +15,7 @@ Zebra::Zpl offers a Ruby DSL to design and print labels using the ZPL programmin
       - [Text](#text)
       - [Barcodes](#barcodes)
       - [QR Codes](#qr-codes)
+      - [Data Matrix](#data-matrix)
       - [Boxes](#boxes)
     - [Options](#options)
       - [Rotation](#elements-rotation)
@@ -184,6 +185,22 @@ label << qrcode
 print_job = Zebra::PrintJob.new '<your-qr-printer-name-on-cups>'
 
 print_job.print label, '<hostname>'
+```
+
+#### Data Matrix
+
+You can create Data Matrix elements to print using instances of the `Zebra::Zpl::Datamatrix` class. It accepts the following options:
+
+* `position`: An array with the coordinates to place the data matrix, in dots.
+* `symbol_height`: Crucial variable of the size size of the data matrix. Accepted values: 1 - label width.
+* `aspect_ratio`: 1 for square, 2 for rectangular.
+
+```ruby
+datamatrix = Zebra::Zpl::Datamatrix.new(
+  data:             'www.github.com',
+  position:         [50,50],
+  symbol_height:     5
+)
 ```
 
 #### Boxes
