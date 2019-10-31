@@ -30,12 +30,12 @@ module Zebra
       end
 
       def rounding_degree=(value)
-        raise InvalidLineThickness unless value.to_i.in? (0..8)
+        raise InvalidLineThickness unless (1..8).include?(value.to_i)
         @rounding_degree = value
       end
 
       def color=(value)
-        raise InvalidColorError unless value.upcase.in?(["W","B"])
+        raise InvalidColorError unless %w[B W].include?(value&.upcase)
         @color = value
       end
 
