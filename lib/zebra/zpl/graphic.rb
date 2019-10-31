@@ -10,9 +10,8 @@ module Zebra
       class InvalidOrientationError < StandardError; end
       class InvalidGraphicType < StandardError; end
 
-      alias_attribute :diameter, :graphic_width
-
       attr_reader :line_thickness, :graphic_width, :graphic_height, :color, :orientation, :rounding_degree, :graphic_type
+      attr_writer :rounding_degree
 
       ELIPSE   = "E"
       BOX      = "B"
@@ -23,10 +22,6 @@ module Zebra
       def graphic_type=(type)
         raise InvalidGraphicType unless %w(E B D C S).include? type
         @graphic_type = type
-      end
-
-      def self.valid_graphic_type?(type)
-        
       end
 
       def line_thickness=(thickness)
@@ -43,7 +38,7 @@ module Zebra
       end
 
       def color=(value)
-        raise InvalidColorError unless %w[R L].include?(value&.upcase)
+        raise InvalidColorError unless %w[B W].include?(value&.upcase)
         @color = value
       end
 
@@ -60,7 +55,7 @@ module Zebra
         when "E"
             "E#{graphic_width},#{graphic_height},#{line_thickness},#{color}"
         when "C"
-            "C#{diameter},#{line_thickness},#{color}"
+            "C#{graphic_width},#{line_thickness},#{color}"
         when "D"
             "D#{graphic_width},#{graphic_height},#{line_thickness},#{color},#{orientation}"
         when "S"
@@ -77,6 +72,7 @@ module Zebra
 
       def check_attributes
         super
+        raise InvalidGraphicType if @graphic_type.nil?
       end
     end
   end
