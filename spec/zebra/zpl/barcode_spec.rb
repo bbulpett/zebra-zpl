@@ -26,6 +26,21 @@ describe Zebra::Zpl::Barcode do
     expect(barcode.type).to eq type
   end
 
+  it "can be initialized with the barcode width" do
+    barcode = described_class.new width: 5
+    expect(barcode.width).to eq 5
+  end
+
+  it "can be initialized with the barcode height" do
+    barcode = described_class.new height: 20
+    expect(barcode.height).to eq 20
+  end
+
+  it "can be initialized with the ratio" do
+    barcode = described_class.new ratio: 3.0
+    expect(barcode.ratio).to eq 3.0
+  end
+
   it "can be initialized with the narrow bar width" do
     barcode = described_class.new narrow_bar_width: 3
     expect(barcode.narrow_bar_width).to eq 3
@@ -34,11 +49,6 @@ describe Zebra::Zpl::Barcode do
   it "can be initialized with the wide bar width" do
     barcode = described_class.new wide_bar_width: 10
     expect(barcode.wide_bar_width).to eq 10
-  end
-
-  it "can be initialized with the barcode height" do
-    barcode = described_class.new height: 20
-    expect(barcode.height).to eq 20
   end
 
   it "can be initialized informing if the human readable code should be printed" do
@@ -89,7 +99,8 @@ describe Zebra::Zpl::Barcode do
       position:         [100, 150],
       type:             Zebra::Zpl::BarcodeType::CODE_128_AUTO,
       height:           20,
-      narrow_bar_width: 4,
+      width:            5,
+      narrow_bar_width: 3,
       wide_bar_width:   6,
       data:             "foobar"
     } }
@@ -131,20 +142,13 @@ describe Zebra::Zpl::Barcode do
       }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the height to be used is not given")
     end
 
-    it "raises an error if the narrow bar width is not given" do
+    it "raises an error if the neither of with, narrow_bar_width, or wide_bar_width are not given" do
+      valid_attributes.delete :width
       valid_attributes.delete :narrow_bar_width
-
-      expect {
-        barcode.to_zpl
-      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the narrow bar width to be used is not given")
-    end
-
-    it "raises an error if the wide bar width is not given" do
       valid_attributes.delete :wide_bar_width
-
       expect {
         barcode.to_zpl
-      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the wide bar width to be used is not given")
+      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the width to be used is not given")
     end
 
     it "begins with the command 'B'" do
@@ -159,37 +163,41 @@ describe Zebra::Zpl::Barcode do
       expect(tokens[3]).to eq '150'
     end
 
-    it "contains the barcode type" do
-      expect(tokens[6]).to start_with "^B#{Zebra::Zpl::BarcodeType::CODE_128_AUTO}"
+    it "contains the width" do
+      expect(tokens[5]).to eq '5'
     end
 
-    it "contains the barcode narrow bar width" do
-      expect(tokens[5]).to eq '4'
+    it "contains the ratio" do
+      expect(tokens[6]).to eq '2.0'
     end
 
     it "contains the barcode height" do
       expect(tokens[7]).to eq '20'
     end
 
+    it "contains the barcode type" do
+      expect(tokens[8]).to start_with "^B#{Zebra::Zpl::BarcodeType::CODE_128_AUTO}"
+    end
+
     it "contains the barcode rotation" do
       expect(tokens[0]).to start_with '^FW'
       expect(tokens[0]).to end_with Zebra::Zpl::Rotation::NO_ROTATION.to_s
-      expect(tokens[6]).to start_with '^B'
-      expect(tokens[6]).to end_with Zebra::Zpl::Rotation::NO_ROTATION.to_s
+      expect(tokens[8]).to start_with '^B'
+      expect(tokens[8]).to end_with Zebra::Zpl::Rotation::NO_ROTATION.to_s
     end
 
     it "contains the correct indication when the human readable code should be printed" do
       valid_attributes.merge! print_human_readable_code: true
-      expect(tokens[8]).to eq 'Y'
+      expect(tokens[9]).to eq 'Y'
     end
 
     it "contains the correct indication when the human readable code should not be printed" do
       valid_attributes.merge! print_human_readable_code: false
-      expect(tokens[8]).to eq 'N'
+      expect(tokens[9]).to eq 'N'
     end
 
     it "contains the data to be printed in the barcode" do
-      expect(tokens[10]).to eq 'foobar'
+      expect(tokens[11]).to eq 'foobar'
     end
   end
 end
