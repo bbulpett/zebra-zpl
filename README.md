@@ -15,8 +15,9 @@ Zebra::Zpl offers a Ruby DSL to design and print labels using the ZPL programmin
       - [Text](#text)
       - [Barcodes](#barcodes)
       - [QR Codes](#qr-codes)
-      - [Data Matrix](#data-matrix)
+      - [Data Matrix](#data-matrix)      
       - [Boxes](#boxes)
+      - [Images](#images)
     - [Options](#options)
       - [Rotation](#elements-rotation)
       - [Justification](#elements-justification)
@@ -221,6 +222,30 @@ box = Zebra::Zpl::Box.new(
   color: 'B',
   line_thickness: 3,
   rounding_degree: 6
+)
+```
+
+#### Images
+
+You can also create graphics elements from an image using the `Zebra::Zpl::Image` class. Images are converted and encoded into an `^GF` (_Graphics Field_) command using the [img2zpl](https://github.com/mtking2/img2zpl) gem. Accepted parameters are:
+
+* `path` (required): The file path or URL of an image.
+* `position`: An array with the coordinates to place the image, in dots.
+* `width`: The width (in pixels) that the image should be printed.
+* `height`: The height (in pixels) that the image should be printed.
+* `rotation`: The number of degrees the image should be rotated
+  * unlike the other elements with strict 90° rotations, image elements can be rotated any number of degrees since the image is rotated with imagemagick before conversion to ZPL.
+* `black_threshold`: A value between 0 and 1 that sets the darkness threshold which determines how dark a pixel should be in order to become black in the resulting b/w image. Use larger value for a more saturated image and smaller value for a less saturated one. Default: `0.5`
+* `invert`: set to `true` to invert which pixels are set to black and which are set to white. Default is, depending on the `black_threshold`, dark pixels become black and light pixels become white.
+
+```ruby
+image = Zebra::Zpl::Image.new(
+  path: '/path/to/my/image.jpg',
+  position: [100, 50],
+  width: 200,
+  height: 180,
+  rotation: -90,
+  black_threshold: 0.35
 )
 ```
 
