@@ -14,6 +14,10 @@ module Zebra
         @font_size = f
       end
 
+      def bold=(value)
+        @bold = value
+      end	
+
       def width=(width)
         unless (margin.nil? || margin < 1)
           @width = (width - (margin*2))
@@ -26,10 +30,6 @@ module Zebra
         raise InvalidMaxLinesError unless value.to_i >= 1
         @max_lines = value
       end
-
-      def bold=(value)	
-        @bold = value	
-      end	
 
       def line_spacing=(value)
         @line_spacing = value || 0
