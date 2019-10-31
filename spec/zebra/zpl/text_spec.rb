@@ -131,7 +131,6 @@ describe Zebra::Zpl::Text do
     end
 
     # it "assumes 1 as the default horizontal multipler" do
-    #   binding.pry
     #   expect(text.to_zpl.split(",")[4].to_i).to eq Zebra::Zpl::HorizontalMultiplier::VALUE_1
     # end
     #
