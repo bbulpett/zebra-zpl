@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Zebra::Zpl::Graphic do
     it "can be initialized with graphic type" do
-      graphic = described_class.new graphic_type: Zebra::Zpl::Graphic::ELIPSE
+      graphic = described_class.new graphic_type: Zebra::Zpl::Graphic::ELLIPSE
       expect(graphic.graphic_type).to eq "E"
     end
 
@@ -71,27 +71,27 @@ describe Zebra::Zpl::Graphic do
         color:             "B",
         orientation:       "L"
       }}
-      let(:graphic_elipse) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::ELIPSE}) }
+      let(:graphic_ellipse) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::ELLIPSE}) }
       let(:graphic_diagonal) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::DIAGONAL})}
       let(:graphic_box) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::BOX}) }
       let(:graphic_symbol) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::SYMBOL}) }
       let(:graphic_circle) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::CIRCLE}) }
       
-      let(:tokens_elipse) { graphic_elipse.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
+      let(:tokens_ellipse) { graphic_ellipse.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
       let(:tokens_diagonal) { graphic_diagonal.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
       let(:tokens_box) { graphic_box.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
       let(:tokens_symbol) { graphic_symbol.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
       let(:tokens_circle) { graphic_circle.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
 
       it "raises an error if the X position is not given" do
-        graphic = described_class.new position: [nil, 50], graphic_type: described_class::ELIPSE
+        graphic = described_class.new position: [nil, 50], graphic_type: described_class::ELLIPSE
         expect {
           graphic.to_zpl
         }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the X value is not given")
       end
 
       it "raises an error if the Y position is not given" do
-        graphic = described_class.new position: [50, nil], graphic_type: described_class::ELIPSE
+        graphic = described_class.new position: [50, nil], graphic_type: described_class::ELLIPSE
         expect {
           graphic.to_zpl
         }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
@@ -105,33 +105,33 @@ describe Zebra::Zpl::Graphic do
       end
 
       it "contains the X position" do
-        expect(tokens_elipse[2]).to eq "50"
+        expect(tokens_ellipse[2]).to eq "50"
       end
 
       it "contains the Y position" do
-        expect(tokens_elipse[1]).to eq "50"
+        expect(tokens_ellipse[1]).to eq "50"
       end
 
       #Elipse Attributes
       
-      it "elipse contains the elipse graphic command '^GE'" do
-        expect(tokens_elipse[3]).to eq "^GE"
+      it "ellipse contains the ellipse graphic command '^GE'" do
+        expect(tokens_ellipse[3]).to eq "^GE"
       end
 
-      it "elipse contains the graphic width" do
-        expect(tokens_elipse[4]).to eq "200"
+      it "ellipse contains the graphic width" do
+        expect(tokens_ellipse[4]).to eq "200"
       end
 
-      it "elipse contains the graphic height" do
-        expect(tokens_elipse[5]).to eq "300"
+      it "ellipse contains the graphic height" do
+        expect(tokens_ellipse[5]).to eq "300"
       end
 
-      it "elipse contains the line thickness" do
-        expect(tokens_elipse[6]).to eq "2"
+      it "ellipse contains the line thickness" do
+        expect(tokens_ellipse[6]).to eq "2"
       end
 
-      it "elipse contains the color" do
-        expect(tokens_elipse[7]).to eq "B"
+      it "ellipse contains the color" do
+        expect(tokens_ellipse[7]).to eq "B"
       end
 
       #Box Attributes
@@ -207,9 +207,7 @@ describe Zebra::Zpl::Graphic do
     #Symbol Attributes
 
       it "symbol contains the symbol graphic command '^GS'" do
-        puts tokens_symbol
         expect(tokens_symbol[3][0..2]).to eq "^GS"
-       
       end
 
       it "symbol contains the orientation" do

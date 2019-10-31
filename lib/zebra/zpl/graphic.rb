@@ -13,7 +13,7 @@ module Zebra
       attr_reader :line_thickness, :graphic_width, :graphic_height, :color, :orientation, :rounding_degree, :graphic_type
       attr_writer :rounding_degree
 
-      ELIPSE   = "E"
+      ELLIPSE   = "E"
       BOX      = "B"
       DIAGONAL = "D"
       CIRCLE   = "C"
