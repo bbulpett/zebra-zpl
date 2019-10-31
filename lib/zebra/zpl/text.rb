@@ -16,7 +16,7 @@ module Zebra
 
       def bold=(value)
         @bold = value
-      end	
+      end
 
       def width=(width)
         unless (margin.nil? || margin < 1)
