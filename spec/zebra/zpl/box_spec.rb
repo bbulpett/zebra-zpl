@@ -3,69 +3,65 @@ require 'spec_helper'
 
 describe Zebra::Zpl::Box do
   it "can be initialized with initial position" do
-    box = described_class.new :position => [20, 40]
-    box.position.should == [20, 40]
-    box.x.should == 20
-    box.y.should == 40
-  end
-
-  it "can be initialized with the end position" do
-    box = described_class.new :end_position => [20, 40]
-    box.end_position.should == [20, 40]
-    box.end_x.should == 20
-    box.end_y.should == 40
+    box = described_class.new position: [20, 40]
+    expect(box.position).to eq [20, 40]
+    expect(box.x).to eq 20
+    expect(box.y).to eq 40
   end
 
   it "can be initialized with the line thckness " do
-    box = described_class.new :line_thickness => 3
-    box.line_thickness.should == 3
+    box = described_class.new line_thickness: 3
+    expect(box.line_thickness).to eq 3
   end
 
   describe "#to_zpl" do
-    subject(:box)    { described_class.new attributes }
-    let(:attributes) { { :position => [20,40], :end_position => [60, 100], :line_thickness => 3 }  }
+    subject(:box) { described_class.new attributes }
+    let(:attributes) {{
+      position: [20,40],
+      line_thickness: 3,
+      box_width: 5,
+      box_height: 4,
+      color: 'B',
+      rounding_degree: 6
+    }}
 
     it "raises an error if the X position was not informed" do
-      box = described_class.new attributes.merge :position => [nil, 40]
+      box = described_class.new attributes.merge position: [nil, 40]
       expect {
         box.to_zpl
       }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the X value is not given")
     end
 
     it "raises an error if the Y position was not informed" do
-      box = described_class.new attributes.merge :position => [20, nil]
+      box = described_class.new attributes.merge position: [20, nil]
       expect {
         box.to_zpl
       }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
     end
 
-    it "raises an error if the end X position was not informed" do
-      box = described_class.new attributes.merge :end_position => [nil, 40]
-      expect {
-        box.to_zpl
-      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the horizontal end position (X) is not given")
-    end
-
-    it "raises an error if the end Y position was not informed" do
-      box = described_class.new attributes.merge :end_position => [20, nil]
-      expect {
-        box.to_zpl
-      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the vertical end position (Y) is not given")
-    end
-
     it "raises an error if the line thickness was not informed" do
-      box = described_class.new attributes.merge :line_thickness => nil
+      box = described_class.new attributes.merge line_thickness: nil
       expect {
         box.to_zpl
       }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the line thickness is not given")
     end
 
-    it "begins with the 'X' command" do
-      box.to_zpl.should =~ /\AX/
+    it "raises an error if the box width was not informed" do
+      box = described_class.new attributes.merge box_width: nil
+      expect {
+        box.to_zpl
+      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the box_width is not given")
+    end
+
+    it "raises an error if the box height was not informed" do
+      box = described_class.new attributes.merge box_height: nil
+      expect {
+        box.to_zpl
+      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the box_height is not given")
     end
 
     it "contains the attributes in correct order" do
-      box.to_zpl.should == "X20,40,3,60,100"
+      expect(box.to_zpl).to eq '^FO20,40^GB5,4,3,B,6^FS'
     end
   end
 end
