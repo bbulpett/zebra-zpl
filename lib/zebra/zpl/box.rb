@@ -41,7 +41,7 @@ module Zebra
 
       def to_zpl
         check_attributes
-        puts "The Box class is deprecated. Please switch to the Graphic class (graphic_type = box)."
+        puts "The Box class is deprecated. Please switch to the Graphic class (graphic_type = box)." unless ENV['RUBY_ENV'] == 'test'
         "^FO#{x},#{y}^GB#{box_width},#{box_height},#{line_thickness},#{color},#{rounding_degree}^FS"
       end
 

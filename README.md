@@ -48,7 +48,6 @@ You create new labels with an instance of the `Zebra::Zpl::Label` class. It acce
 * `copies`: The number of copies to print. This option defaults to 1.
 * `width`: The label's width, in dots.
 * `length`: The label's length, is dots.
-* `gap`: The gap between labels, in dots.
 * `print_speed`: The print speed to be used. You can use values between 0 and 6. This option is required.
 
 With a label, you can start adding elements to it:

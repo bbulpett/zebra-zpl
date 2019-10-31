@@ -1,10 +1,16 @@
 ### 1.1.0 (next)
 
 * Your contribution here.
+* [#50](https://github.com/bbulpett/zebra-zpl/pull/50): Add support for image elements by incorporating the [img2zpl](https://github.com/mtking2/img2zpl) gem - [@mtking2](https://github.com/mtking2)
+* [#49](https://github.com/bbulpett/zebra-zpl/pull/49): Fixed bug with `Barcode`'s `^BY` command. Added UPCA, UPCE, & EAN13 types - [@mtking2](https://github.com/mtking2)
 * [#45](https://github.com/bbulpett/zebra-zpl/pull/45): Add CHANGELOG & update README - [@mtking2](https://github.com/mtking2)
 * [#44](https://github.com/bbulpett/zebra-zpl/pull/44): Update README & add more docs - [@mtking2](https://github.com/mtking2)
+* [#43](https://github.com/bbulpett/zebra-zpl/pull/43): Add ZPL comment element - [@LagTag](https://github.com/LagTag)
+* [#42](https://github.com/bbulpett/zebra-zpl/pull/42): Consolidate Graphic Elements to One Class. Deprecate `Box` class - [@LagTag](https://github.com/LagTag)
+* [#41](https://github.com/bbulpett/zebra-zpl/pull/41): Ability to pass ZPL string to PrintJob - [@LagTag](https://github.com/LagTag)
 * [#40](https://github.com/bbulpett/zebra-zpl/pull/40): Bold Text - [@LagTag](https://github.com/LagTag)
 * [#39](https://github.com/bbulpett/zebra-zpl/pull/39): Fix specs + minor maintenance - [@mtking2](https://github.com/mtking2)
+* [#36](https://github.com/bbulpett/zebra-zpl/pull/36): Add Datamatrix - [@rafaelmf3](https://github.com/rafaelmf3)
 * [#33](https://github.com/bbulpett/zebra-zpl/pull/33): Remove the hardcoded attributes for the box element - [@LagTag](https://github.com/LagTag)
 * [#32](https://github.com/bbulpett/zebra-zpl/pull/32): Added diagonal line graphic (^GD) - [@LagTag](https://github.com/LagTag)
 * [#31](https://github.com/bbulpett/zebra-zpl/pull/31): Added Circle Graphic (^GC) - [@LagTag](https://github.com/LagTag)
