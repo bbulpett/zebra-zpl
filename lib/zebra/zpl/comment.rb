@@ -1,24 +1,15 @@
-require "zebra/zpl/printable"
-
 module Zebra
   module Zpl
     class Comment
-      include Printable
-      attr_accessor :comment
+      attr_reader :data
+      attr_writer :data
 
+      def initialize(options = {})
+        options.each_pair { |attribute, value| self.__send__ "#{attribute}=", value }
+      end
+      
       def to_zpl
-        check_attributes
-        "^FX#{comment}^FS"
-      end
-
-      private
-
-      def has_data?
-        false
-      end
-
-      def check_attributes
-        super
+        "^FX#{data}^FS"
       end
     end
   end
