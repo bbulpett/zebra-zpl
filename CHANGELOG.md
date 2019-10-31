@@ -3,6 +3,7 @@
 * Your contribution here.
 * [#50](https://github.com/bbulpett/zebra-zpl/pull/50): Add support for image elements by incorporating the [img2zpl](https://github.com/mtking2/img2zpl) gem - [@mtking2](https://github.com/mtking2)
 * [#49](https://github.com/bbulpett/zebra-zpl/pull/49): Fixed bug with `Barcode`'s `^BY` command. Added UPCA, UPCE, & EAN13 types - [@mtking2](https://github.com/mtking2)
+* [#48](https://github.com/bbulpett/zebra-zpl/pull/48): Fixed bug breaking `Text` elements. Added rspecs for `Datamatrix` - [@mtking2](https://github.com/mtking2)
 * [#45](https://github.com/bbulpett/zebra-zpl/pull/45): Add CHANGELOG & update README - [@mtking2](https://github.com/mtking2)
 * [#44](https://github.com/bbulpett/zebra-zpl/pull/44): Update README & add more docs - [@mtking2](https://github.com/mtking2)
 * [#43](https://github.com/bbulpett/zebra-zpl/pull/43): Add ZPL comment element - [@LagTag](https://github.com/LagTag)
