@@ -11,10 +11,9 @@ describe Zebra::Zpl::Label do
       expect(label.width).to eq 300
     end
 
-    it "sets the label length/gap" do
-      label = described_class.new length_and_gap: [400, 24]
+    it "sets the label length" do
+      label = described_class.new length: 400
       expect(label.length).to eq 400
-      expect(label.gap).to eq 24
     end
 
     it "sets the printing speed" do
@@ -61,7 +60,7 @@ describe Zebra::Zpl::Label do
       label << obj1
       label << obj2
       label.width          = 100
-      label.length_and_gap = [200, 24]
+      label.length         = 200
       label.print_speed    = 3
       label.dump_contents(io)
       expect(io).to eq '^XA^LL200^LH0,0^LS10^PW100^PR3foobarblabla^PQ1^XZ'
@@ -72,7 +71,7 @@ describe Zebra::Zpl::Label do
       expect(io).to_not match /^LL/
     end
 
-    it "does not try to set the length/gap when they were not informed (falls back to autosense)" do
+    it "does not try to set the length when it is not informed (falls back to autosense)" do
       label.dump_contents(io)
       expect(io).to_not match /^PW/
     end
