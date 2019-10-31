@@ -65,19 +65,23 @@ describe Zebra::Zpl::Graphic do
     describe "#to_zpl" do
       let(:valid_attributes) { {
         position:         [50, 50],
-        graphic_type:     Zebra::Zpl::Graphic::ELIPSE
+        graphic_width:     200,
+        graphic_height:    300,
+        line_thickness:    2,
+        color:             "B",
+        orientation:       "L"
       }}
-      let(:graphic_elipse) { described_class.new valid_attributes }
-      let(:graphic_diaganol) { described_class.new }
-      let(:graphic_box) { described_class.new }
-      let(:graphic_symbol) { described_class.new }
-      let(:graphic_circle) { described_class.new }
+      let(:graphic_elipse) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::ELIPSE}) }
+      let(:graphic_diagonal) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::DIAGONAL})}
+      let(:graphic_box) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::BOX}) }
+      let(:graphic_symbol) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::SYMBOL}) }
+      let(:graphic_circle) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::CIRCLE}) }
       
-      let(:tokens_elipse) { graphic.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
-      let(:tokens_diaganol) { graphic.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
-      let(:tokens_box) { graphic.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
-      let(:tokens_symbol) { graphic.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
-      let(:tokens_circle) { graphic.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
+      let(:tokens_elipse) { graphic_elipse.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
+      let(:tokens_diagonal) { graphic_diagonal.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
+      let(:tokens_box) { graphic_box.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
+      let(:tokens_symbol) { graphic_symbol.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
+      let(:tokens_circle) { graphic_circle.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
 
       it "raises an error if the X position is not given" do
         graphic = described_class.new position: [nil, 50], graphic_type: described_class::ELIPSE
@@ -93,41 +97,131 @@ describe Zebra::Zpl::Graphic do
         }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
       end
 
-     
-    end
-
-        
-=begin
-   
-
-      it "contains the barcode command '^B'" do
-        expect(datamatrix.to_zpl).to match /\^B/
+      it "raises an error if Graphic Type is not given" do
+        graphic = described_class.new position: [50, 50]
+        expect {
+          graphic.to_zpl
+        }.to raise_error(Zebra::Zpl::Graphic::InvalidGraphicType)
       end
 
       it "contains the X position" do
-        expect(tokens[2]).to eq "50"
+        expect(tokens_elipse[2]).to eq "50"
       end
 
       it "contains the Y position" do
-        expect(tokens[3]).to eq "50"
+        expect(tokens_elipse[1]).to eq "50"
       end
 
-      it "contains Data Matrix code type" do
-        expect(tokens[4]).to eq "^BXN"
+      #Elipse Attributes
+      
+      it "elipse contains the elipse graphic command '^GE'" do
+        expect(tokens_elipse[3]).to eq "^GE"
       end
 
-      it "contains the symbol_height" do
-        expect(tokens[5]).to eq "5"
+      it "elipse contains the graphic width" do
+        expect(tokens_elipse[4]).to eq "200"
       end
 
-      it "contains the quality level" do
-        expect(tokens[6]).to eq "200"
+      it "elipse contains the graphic height" do
+        expect(tokens_elipse[5]).to eq "300"
       end
 
-      it "contains the data to be printed in the datamatrix" do
-        expect(tokens[8]).to eq "foobar"
+      it "elipse contains the line thickness" do
+        expect(tokens_elipse[6]).to eq "2"
       end
 
-  end
-=end
+      it "elipse contains the color" do
+        expect(tokens_elipse[7]).to eq "B"
+      end
+
+      #Box Attributes
+
+      it "box contains the box graphic command '^GB'" do
+        expect(tokens_box[3]).to eq "^GB"
+      end
+
+      it "box contains the graphic width" do
+        expect(tokens_box[4]).to eq "200"
+      end
+
+      it "box contains the graphic height" do
+        expect(tokens_box[5]).to eq "300"
+      end
+
+      it "box contains the line thickness" do
+        expect(tokens_box[6]).to eq "2"
+      end
+
+      it "box contains the color" do
+        expect(tokens_box[7]).to eq "B"
+      end
+
+      it "box contains the orientation" do
+        expect(tokens_box[8]).to eq "L"
+      end
+
+      #Circle Attributes
+
+      it "circle contains the circle graphic command '^GC'" do
+        expect(tokens_circle[3]).to eq "^GC"
+      end
+
+      it "circle contains the graphic width" do
+        expect(tokens_circle[4]).to eq "200"
+      end
+
+      it "circle contains the line thickness" do
+        expect(tokens_circle[5]).to eq "2"
+      end
+
+      it "circle contains the color" do
+        expect(tokens_circle[6]).to eq "B"
+      end
+
+      #Diagonal Attributes
+
+      it "diagonal contains the diagonal graphic command '^GD'" do
+        expect(tokens_diagonal[3]).to eq "^GD"
+      end
+
+      it "diagonal contains the graphic width" do
+        expect(tokens_diagonal[4]).to eq "200"
+      end
+
+      it "diagonal contains the graphic width" do
+        expect(tokens_diagonal[5]).to eq "300"
+      end
+
+      it "diagonal contains the line thickness" do
+        expect(tokens_diagonal[6]).to eq "2"
+      end
+
+      it "diagonal contains the color" do
+        expect(tokens_diagonal[7]).to eq "B"
+      end
+
+      it "diagonal contains the orientation" do
+        expect(tokens_diagonal[8]).to eq "L"
+      end
+     
+    #Symbol Attributes
+
+      it "symbol contains the symbol graphic command '^GS'" do
+        puts tokens_symbol
+        expect(tokens_symbol[3][0..2]).to eq "^GS"
+       
+      end
+
+      it "symbol contains the orientation" do
+        expect(tokens_symbol[3][3]).to eq "L"
+      end
+
+      it "symbol contains the graphic height" do
+        expect(tokens_symbol[4]).to eq "300"
+      end
+
+      it "symbol contains the graphic width" do
+        expect(tokens_symbol[5]).to eq "200"
+      end      
+    end
 end
