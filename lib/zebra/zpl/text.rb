@@ -14,8 +14,8 @@ module Zebra
         @font_size = f
       end
 
-      def bold=(value)	
-        @bold = value	
+      def bold=(value)
+        @bold = value
       end
 
       def width=(width)
