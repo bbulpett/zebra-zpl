@@ -11,16 +11,16 @@ Zebra::Zpl offers a Ruby DSL to design and print labels using the ZPL programmin
   - [Usage](#usage)
     - [Building Labels](#building-labels)
     - [Printing Labels](#printing-the-labels)
-    - [Elements](#available-elements)
-      - [Text](#text)
-      - [Barcodes](#barcodes)
-      - [QR Codes](#qr-codes)
-      - [Data Matrix](#data-matrix)      
-      - ~[Boxes](#boxes)~ - deprecated. See [Graphics](#graphics)
-      - [Images](#images)
-    - [Options](#options)
-      - [Rotation](#elements-rotation)
-      - [Justification](#elements-justification)
+  - [Elements](#available-elements)
+    - [Text](#text)
+    - [Barcodes](#barcodes)
+    - [QR Codes](#qr-codes)
+    - [Data Matrix](#data-matrix)      
+    - ~[Boxes](#boxes)~ - deprecated. See [Graphics](#graphics)
+    - [Images](#images)
+  - [Options](#options)
+    - [Rotation](#elements-rotation)
+    - [Justification](#elements-justification)
   - [Contributing](#contributing)
   - [References](#references)
 
@@ -114,9 +114,13 @@ If using OSX then you will have to manually build it from source and add it to y
 
 <sup><a name="fn2">2</a>. The printer name that you pass in must correspond with the **shared printer name** on the Windows machine.</sup>
 
-### Available elements
+## Available elements
 
-#### Text
+### Text
+
+<p align="center">
+  <img src="docs/images/text.png" height="200">
+</p>
 
 You create text elements to print using instances of the `Zebra::Zpl::Text` class. It accepts the following options:
 
@@ -132,7 +136,11 @@ For the print modes, you can also use the constants:
 * `Zebra::Zpl::PrintMode::REVERSE`
 
 
-#### Barcodes
+### Barcodes
+
+<p align="center">
+  <img src="docs/images/barcode.png" height="200">
+</p>
 
 You create barcode elements to print using instances of the `Zebra::Zpl::Barcode` class. It accepts the following options:
 
@@ -156,7 +164,11 @@ The available barcode types are:
 * `Zebra::Zpl::BarcodeType::CODE_UPS_MAXICODE`
 * `Zebra::Zpl::BarcodeType::CODE_QR`
 
-#### QR Codes
+### QR Codes
+
+<p align="center">
+  <img src="docs/images/qrcode.png" height="200">
+</p>
 
 You can create QR Codes elements to print using instances of the `Zebra::Zpl::Qrcode` class. It accepts the following options:
 
@@ -164,7 +176,7 @@ You can create QR Codes elements to print using instances of the `Zebra::Zpl::Qr
 * `scale_factor`: Crucial variable of the QR codes's size. Accepted values: 1-99.
 * `correction_level`: Algorithm enables reading damaged QR codes. There are four error correction levels: L - 7% of codewords can be restored, M - 15% can be restored, Q - 25% can be restored, H - 30% can be restored.
 
-##### Printing QR codes
+#### Printing QR codes
 
 ```ruby
 label = Zebra::Zpl::Label.new(
@@ -187,7 +199,11 @@ print_job = Zebra::PrintJob.new '<your-qr-printer-name-on-cups>'
 print_job.print label, '<hostname>'
 ```
 
-#### Data Matrix
+### Data Matrix
+
+<p align="center">
+  <img src="docs/images/datamatrix.png" height="200">
+</p>
 
 You can create Data Matrix elements to print using instances of the `Zebra::Zpl::Datamatrix` class. It accepts the following options:
 
@@ -203,11 +219,15 @@ datamatrix = Zebra::Zpl::Datamatrix.new(
 )
 ```
 
-#### Boxes
+### Boxes
 
 **&ast;&ast;&ast; The `Zebra::Zpl::Box` class is deprecated and will be removed in future versions. Please switch to the `Zebra::Zpl::Graphic` class (see [Graphics](#graphics) below). &ast;&ast;&ast;**  
 
-#### Graphics
+### Graphics
+
+<p align="center">
+  <img src="docs/images/graphics.png" height="200">
+</p>
 
 You can create graphics elements using the `Zebra::Zpl::Graphic` class:
 
@@ -288,7 +308,11 @@ print_job = Zebra::PrintJob.new '<your-qr-printer-name-on-cups>'
 print_job.print label, '<hostname>'
 ```
 
-#### Images
+### Images
+
+<p align="center">
+  <img src="docs/images/images.png" height="200">
+</p>  
 
 You can also create graphics elements from an image using the `Zebra::Zpl::Image` class. Images are converted and encoded into an `^GF` (_Graphics Field_) command using the [img2zpl](https://github.com/mtking2/img2zpl) gem. Accepted parameters are:
 
@@ -312,9 +336,9 @@ image = Zebra::Zpl::Image.new(
 )
 ```
 
-### Options
+## Options
 
-#### Elements Rotation
+### Elements Rotation
 
 All printable elements can be rotated on the label, using the `:Rotation` option. The accepted rotation values are:
 
@@ -323,7 +347,7 @@ All printable elements can be rotated on the label, using the `:Rotation` option
 * `Zebra::Zpl::Rotation::DEGREES_180`: will rotate the element 180 degrees.
 * `Zebra::Zpl::Rotation::DEGREES_270`: will rotate the element 270 degrees.
 
-#### Elements Justification
+### Elements Justification
 
 There are four ZPL-supported `:Justification` parameters. "LEFT" (left-justified) is the default.
 
@@ -331,6 +355,10 @@ There are four ZPL-supported `:Justification` parameters. "LEFT" (left-justified
 * `Zebra::Zpl::Justification::RIGHT` ~ right-justified
 * `Zebra::Zpl::Justification::CENTER` ~ centered
 * `Zebra::Zpl::Justification::JUSTIFIED` ~ full-width-justifed _(YMMV)_
+
+## Examples
+
+See [docs/example.rb](docs/example.rb) for code samples of most elements.
 
 ## Contributing
 
