@@ -340,6 +340,10 @@ image = Zebra::Zpl::Image.new(
 
 ### Elements Rotation
 
+<p align="center">
+  <img src="docs/images/rotation.png" height="200">
+</p>  
+
 All printable elements can be rotated on the label, using the `:Rotation` option. The accepted rotation values are:
 
 * `Zebra::Zpl::Rotation::NO_ROTATION`: will not rotate the element.
@@ -348,6 +352,10 @@ All printable elements can be rotated on the label, using the `:Rotation` option
 * `Zebra::Zpl::Rotation::DEGREES_270`: will rotate the element 270 degrees.
 
 ### Elements Justification
+
+<p align="center">
+  <img src="docs/images/justification.png" height="200">
+</p>  
 
 There are four ZPL-supported `:Justification` parameters. "LEFT" (left-justified) is the default.
 
