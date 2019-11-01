@@ -35,9 +35,9 @@ describe Zebra::Zpl::Graphic do
         graphic = described_class.new rounding_degree: 2
         expect(graphic.rounding_degree).to eq 2
     end
-    
 
-  
+
+
     describe "#orientation" do
       it "raises an error if the orientation not in [N L]" do
         expect { described_class.new orientation: 'A' }.to raise_error(Zebra::Zpl::Graphic::InvalidOrientationError)
@@ -65,18 +65,20 @@ describe Zebra::Zpl::Graphic do
     describe "#to_zpl" do
       let(:valid_attributes) { {
         position:         [50, 50],
-        graphic_width:     200,
-        graphic_height:    300,
-        line_thickness:    2,
-        color:             "B",
-        orientation:       "L"
+        graphic_width:    200,
+        graphic_height:   300,
+        line_thickness:   2,
+        color:            "B",
+        orientation:      "L",
+        rounding_degree:  3,
+        symbol_type:      "C"
       }}
       let(:graphic_ellipse) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::ELLIPSE}) }
       let(:graphic_diagonal) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::DIAGONAL})}
       let(:graphic_box) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::BOX}) }
       let(:graphic_symbol) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::SYMBOL}) }
       let(:graphic_circle) { described_class.new valid_attributes.merge({graphic_type: Zebra::Zpl::Graphic::CIRCLE}) }
-      
+
       let(:tokens_ellipse) { graphic_ellipse.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
       let(:tokens_diagonal) { graphic_diagonal.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
       let(:tokens_box) { graphic_box.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
@@ -109,117 +111,117 @@ describe Zebra::Zpl::Graphic do
       end
 
       it "contains the Y position" do
-        expect(tokens_ellipse[1]).to eq "50"
+        expect(tokens_ellipse[3]).to eq "50"
       end
 
       #Elipse Attributes
-      
+
       it "ellipse contains the ellipse graphic command '^GE'" do
-        expect(tokens_ellipse[3]).to eq "^GE"
+        expect(tokens_ellipse[4]).to eq "^GE"
       end
 
       it "ellipse contains the graphic width" do
-        expect(tokens_ellipse[4]).to eq "200"
+        expect(tokens_ellipse[5]).to eq "200"
       end
 
       it "ellipse contains the graphic height" do
-        expect(tokens_ellipse[5]).to eq "300"
+        expect(tokens_ellipse[6]).to eq "300"
       end
 
       it "ellipse contains the line thickness" do
-        expect(tokens_ellipse[6]).to eq "2"
+        expect(tokens_ellipse[7]).to eq "2"
       end
 
       it "ellipse contains the color" do
-        expect(tokens_ellipse[7]).to eq "B"
+        expect(tokens_ellipse[8]).to eq "B"
       end
 
       #Box Attributes
 
       it "box contains the box graphic command '^GB'" do
-        expect(tokens_box[3]).to eq "^GB"
+        expect(tokens_box[4]).to eq "^GB"
       end
 
       it "box contains the graphic width" do
-        expect(tokens_box[4]).to eq "200"
+        expect(tokens_box[5]).to eq "200"
       end
 
       it "box contains the graphic height" do
-        expect(tokens_box[5]).to eq "300"
+        expect(tokens_box[6]).to eq "300"
       end
 
       it "box contains the line thickness" do
-        expect(tokens_box[6]).to eq "2"
+        expect(tokens_box[7]).to eq "2"
       end
 
       it "box contains the color" do
-        expect(tokens_box[7]).to eq "B"
+        expect(tokens_box[8]).to eq "B"
       end
 
-      it "box contains the orientation" do
-        expect(tokens_box[8]).to eq "L"
+      it "box contains the rounding degree" do
+        expect(tokens_box[9]).to eq "3"
       end
 
       #Circle Attributes
 
       it "circle contains the circle graphic command '^GC'" do
-        expect(tokens_circle[3]).to eq "^GC"
+        expect(tokens_circle[4]).to eq "^GC"
       end
 
       it "circle contains the graphic width" do
-        expect(tokens_circle[4]).to eq "200"
+        expect(tokens_circle[5]).to eq "200"
       end
 
       it "circle contains the line thickness" do
-        expect(tokens_circle[5]).to eq "2"
+        expect(tokens_circle[6]).to eq "2"
       end
 
       it "circle contains the color" do
-        expect(tokens_circle[6]).to eq "B"
+        expect(tokens_circle[7]).to eq "B"
       end
 
       #Diagonal Attributes
 
       it "diagonal contains the diagonal graphic command '^GD'" do
-        expect(tokens_diagonal[3]).to eq "^GD"
+        expect(tokens_diagonal[4]).to eq "^GD"
       end
 
       it "diagonal contains the graphic width" do
-        expect(tokens_diagonal[4]).to eq "200"
+        expect(tokens_diagonal[5]).to eq "200"
       end
 
       it "diagonal contains the graphic width" do
-        expect(tokens_diagonal[5]).to eq "300"
+        expect(tokens_diagonal[6]).to eq "300"
       end
 
       it "diagonal contains the line thickness" do
-        expect(tokens_diagonal[6]).to eq "2"
+        expect(tokens_diagonal[7]).to eq "2"
       end
 
       it "diagonal contains the color" do
-        expect(tokens_diagonal[7]).to eq "B"
+        expect(tokens_diagonal[8]).to eq "B"
       end
 
       it "diagonal contains the orientation" do
-        expect(tokens_diagonal[8]).to eq "L"
+        expect(tokens_diagonal[9]).to eq "L"
       end
-     
+
     #Symbol Attributes
 
       it "symbol contains the symbol graphic command '^GS'" do
-        expect(tokens_symbol[3][0..2]).to eq "^GS"
-      end
-
-      it "symbol contains the orientation" do
-        expect(tokens_symbol[3][3]).to eq "L"
+        expect(tokens_symbol[4][0..2]).to eq "^GS"
       end
 
       it "symbol contains the graphic height" do
-        expect(tokens_symbol[4]).to eq "300"
+        expect(tokens_symbol[5]).to eq "300"
       end
 
       it "symbol contains the graphic width" do
-        expect(tokens_symbol[5]).to eq "200"
-      end      
+        expect(tokens_symbol[6]).to eq "200"
+      end
+
+      it "symbol contains the symbol type" do
+        expect(tokens_symbol[7]).to eq "^FDC"
+      end
     end
 end
