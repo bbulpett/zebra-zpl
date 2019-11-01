@@ -7,6 +7,7 @@ describe Zebra::PrintJob do
 
   describe "#print" do
     let(:label) { Zebra::Zpl::Label.new(print_speed: 2) }
+    let(:zpl_string) { '^XA^FO50,50^FDHello, Zebra^FS^XZ' }
     let(:ip) { '127.0.0.1' }
 
     subject(:print_job) { described_class.new "Zebra" }
@@ -20,6 +21,11 @@ describe Zebra::PrintJob do
     it "prints the label" do
       expect(print_job).to receive(:system).with(/r?lpr? -(h|H) 127.0.0.1 -(d|P) Zebra.*/).at_least(:once)
       print_job.print label, ip
+    end
+
+    it "can print from a ZPL string" do
+      expect(print_job).to receive(:system).with(/r?lpr? -(h|H) 127.0.0.1 -(d|P) Zebra.*/).at_least(:once)
+      print_job.print zpl_string, ip
     end
   end
 end
