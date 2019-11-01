@@ -1,6 +1,7 @@
 ### 1.1.0 (next)
 
 * Your contribution here.
+* [#53](https://github.com/bbulpett/zebra-zpl/pull/53): Added support for symbol types, fixed other bugs with the `Graphic` class, updated specs - [@mtking2](https://github.com/mtking2)
 * [#50](https://github.com/bbulpett/zebra-zpl/pull/50): Add support for image elements by incorporating the [img2zpl](https://github.com/mtking2/img2zpl) gem - [@mtking2](https://github.com/mtking2)
 * [#49](https://github.com/bbulpett/zebra-zpl/pull/49): Fixed bug with `Barcode`'s `^BY` command. Added UPCA, UPCE, & EAN13 types - [@mtking2](https://github.com/mtking2)
 * [#48](https://github.com/bbulpett/zebra-zpl/pull/48): Fixed bug breaking `Text` elements. Added rspecs for `Datamatrix` - [@mtking2](https://github.com/mtking2)
