@@ -36,7 +36,7 @@ module Zebra
 
       def to_zpl
         check_attributes
-        "^FO#{x},#{y}^B7#{rotation},#{row_height},#{security_level},#{column_number},#{row_number},#{truncate} ^FD #{data} ^FS"
+        "^FO#{x},#{y}^BY,,10^B7#{rotation},#{row_height},#{security_level},#{column_number},#{row_number},#{truncate} ^FD #{data} ^FS"
       end
 
       private

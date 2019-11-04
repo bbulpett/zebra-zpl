@@ -26,7 +26,7 @@ module Zebra
 
       def to_zpl
         check_attributes
-        "^FW#{rotation}^FO#{x},#{y}^BQN,2,#{scale_factor},,3^FD#{correction_level}A,#{data}^FS"
+        "^FW#{rotation}^FO#{x},#{y}^BY,,10^BQN,2,#{scale_factor},,3^FD#{correction_level}A,#{data}^FS"
       end
 
       private
