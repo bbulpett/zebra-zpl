@@ -1,6 +1,9 @@
-### 1.1.0 (next)
+### 1.1.1 (next)
 
 * Your contribution here.
+
+### 1.1.0 (11/04/2019)
+
 * [#54](https://github.com/bbulpett/zebra-zpl/pull/54): Fix height bug with ^B commands - [@mtking2](https://github.com/mtking2)
 * [#53](https://github.com/bbulpett/zebra-zpl/pull/53): Added support for symbol types, fixed other bugs with the `Graphic` class, updated specs - [@mtking2](https://github.com/mtking2)
 * [#50](https://github.com/bbulpett/zebra-zpl/pull/50): Add support for image elements by incorporating the [img2zpl](https://github.com/mtking2/img2zpl) gem - [@mtking2](https://github.com/mtking2)
