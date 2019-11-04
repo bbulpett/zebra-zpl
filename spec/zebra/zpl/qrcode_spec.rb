@@ -83,19 +83,19 @@ describe Zebra::Zpl::Qrcode do
     end
 
     it "contains QR code type" do
-      expect(tokens[4]).to eq "^BQN"
+      expect(tokens[6]).to eq "^BQN"
     end
 
     it "contains the scale factor" do
-      expect(tokens[6]).to eq "3"
+      expect(tokens[8]).to eq "3"
     end
 
     it "contains the error correction level" do
-      expect(tokens[7]).to eq "3"
+      expect(tokens[9]).to eq "3"
     end
 
     it "contains the data to be printed in the qrcode" do
-      expect(tokens[9]).to eq "foobar"
+      expect(tokens[11]).to eq "foobar"
     end
   end
 end
