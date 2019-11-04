@@ -106,19 +106,19 @@ describe Zebra::Zpl::Datamatrix do
       end
 
       it "contains Data Matrix code type" do
-        expect(tokens[4]).to eq "^BXN"
+        expect(tokens[6]).to eq "^BXN"
       end
 
       it "contains the symbol_height" do
-        expect(tokens[5]).to eq "5"
+        expect(tokens[7]).to eq "5"
       end
 
       it "contains the quality level" do
-        expect(tokens[6]).to eq "200"
+        expect(tokens[8]).to eq "200"
       end
 
       it "contains the data to be printed in the datamatrix" do
-        expect(tokens[8]).to eq "foobar"
+        expect(tokens[10]).to eq "foobar"
       end
   end
 end
