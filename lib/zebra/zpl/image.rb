@@ -15,6 +15,10 @@ module Zebra
         @path = @img.path
       end
 
+      def source
+        @img
+      end
+
       def width=(value)
         raise InvalidSizeError.new('Invalid image width') unless value.to_i.positive?
         @width = value.to_i
