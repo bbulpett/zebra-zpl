@@ -143,6 +143,7 @@ image = Zebra::Zpl::Image.new(
 label << image
 print_zpl_str('image', label)
 
+# inverted image
 label = new_label
 image = Zebra::Zpl::Image.new(
   path: File.expand_path('./images/earth.jpg', File.dirname(__FILE__)),
@@ -154,6 +155,33 @@ image = Zebra::Zpl::Image.new(
 label << image
 print_zpl_str('image_inverted', label)
 
+################################################################################
+# Image Manipulation
+################################################################################
+label = new_label
+image = Zebra::Zpl::Image.new(
+  path: File.expand_path('./images/ruby.png', File.dirname(__FILE__)),
+  position: [0, 0],
+  width: 305,
+  height: 305,
+  black_threshold: 0.65
+)
+src = image.source
+src.background('white').flatten
+
+# perform edge detection on the image
+MiniMagick::Tool::Convert.new do |convert|
+  convert << src.path
+  convert << '-colorspace' << 'gray'
+  convert << '-edge' << '4'
+  convert << '-negate'
+  convert << src.path
+end
+
+src.trim
+
+label << image
+print_zpl_str('image_manipulation', label)
 
 ################################################################################
 # Justification
