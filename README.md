@@ -344,7 +344,7 @@ label << image
 
 
 
-Image elements can also be modified in many ways before being added to the label my calling ImageMagick commands (provided by the [minimagick](https://github.com/minimagick/minimagick) & [img2zpl](https://github.com/mtking2/img2zpl) gems) on the source `Img2Zpl::Image < MiniMagick::Image` object.
+Image elements can also be modified in many ways before being added to the label by calling ImageMagick commands (provided by the [minimagick](https://github.com/minimagick/minimagick) & [img2zpl](https://github.com/mtking2/img2zpl) gems) on the source `Img2Zpl::Image < MiniMagick::Image` object.
 
 **Example:** Flattening an image's layers, so it is properly converted, and then trimming out unnecessary white space around the edges:
 
