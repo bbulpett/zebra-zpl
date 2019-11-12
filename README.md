@@ -340,17 +340,15 @@ image = Zebra::Zpl::Image.new(
 
 label << image
 ```
-##### Modifying Images
-
-
-
-Image elements can also be modified in many ways before being added to the label by calling ImageMagick commands (provided by the [minimagick](https://github.com/minimagick/minimagick) & [img2zpl](https://github.com/mtking2/img2zpl) gems) on the source `Img2Zpl::Image < MiniMagick::Image` object.
-
-**Example:** Flattening an image's layers, so it is properly converted, and then trimming out unnecessary white space around the edges:
+**Modifying Images**
 
 <p align="center">
   <img src="docs/images/image_manipulation.png" width="500">
 </p>  
+
+Image elements can also be modified in many ways before being added to the label by calling ImageMagick commands (provided by the [minimagick](https://github.com/minimagick/minimagick) & [img2zpl](https://github.com/mtking2/img2zpl) gems) on the source `Img2Zpl::Image < MiniMagick::Image` object.
+
+**Example:** Flattening an image's layers, so it is properly converted, and then trimming out unnecessary white space around the edges:
 
 ```ruby
 label = Zebra::Zpl::Label.new width: 600, length: 305, print_speed: 6
