@@ -325,7 +325,10 @@ You can also create graphics elements from an image using the `Zebra::Zpl::Image
 * `black_threshold`: A value between 0 and 1 that sets the darkness threshold which determines how dark a pixel should be in order to become black in the resulting b/w image. Use larger value for a more saturated image and smaller value for a less saturated one. Default: `0.5`
 * `invert`: set to `true` to invert which pixels are set to black and which are set to white. Default is, depending on the `black_threshold`, dark pixels become black and light pixels become white.
 
+#### Usage
 ```ruby
+label = Zebra::Zpl::Label.new width: 600, length: 305, print_speed: 6
+
 image = Zebra::Zpl::Image.new(
   path: '/path/to/my/image.jpg',
   position: [100, 50],
@@ -334,6 +337,31 @@ image = Zebra::Zpl::Image.new(
   rotation: -90,
   black_threshold: 0.35
 )
+
+label << image
+```
+##### Modifying Images
+
+
+
+Image elements can also be modified in many ways before being added to the label by calling ImageMagick commands (provided by the [minimagick](https://github.com/minimagick/minimagick) & [img2zpl](https://github.com/mtking2/img2zpl) gems) on the source `Img2Zpl::Image < MiniMagick::Image` object.
+
+**Example:** Flattening an image's layers, so it is properly converted, and then trimming out unnecessary white space around the edges:
+
+<p align="center">
+  <img src="docs/images/image_manipulation.png" width="500">
+</p>  
+
+```ruby
+label = Zebra::Zpl::Label.new width: 600, length: 305, print_speed: 6
+image = Zebra::Zpl::Image.new path: 'path/to/image.png', position: [0, 0]
+
+img_src = image.source #=> instance of Img2Zpl::Image < MiniMagick::Image
+
+img_src.flatten
+img_src.trim
+
+label << image
 ```
 
 ## Options

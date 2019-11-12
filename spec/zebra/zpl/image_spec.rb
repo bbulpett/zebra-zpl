@@ -61,7 +61,7 @@ describe Zebra::Zpl::Image do
     end
   end
 
-  describe '#to_zpl' do
+  context "instance methods" do
     let(:valid_attributes) { {
       path:       'spec/fixtures/default.jpg',
       position:   [50, 50],
@@ -69,45 +69,78 @@ describe Zebra::Zpl::Image do
       height:     150
     }}
     let(:image) { described_class.new valid_attributes }
-    let(:tokens) { image.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
 
-    it 'raises an error if the X position is not given' do
-      qrcode = described_class.new position: [nil, 50]
-      expect {
-        qrcode.to_zpl
-      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the X value is not given")
+    describe '#source' do
+      it 'returns an Img2Zpl::Image object' do
+        expect(image.source.class).to eq Img2Zpl::Image
+      end
+
+      it 'responds to ImageMagick (MiniMagick::Image) commands' do
+        attr = valid_attributes
+        attr.delete(:width)
+        attr.delete(:height)
+        img = described_class.new attr
+        src = img.src
+        expect(src.respond_to?(:resize)).to be true
+        expect(src.respond_to?(:trim)).to be true
+        expect(src.respond_to?(:crop)).to be true
+        expect(src.respond_to?(:flatten)).to be true
+        expect(src.respond_to?(:rotate)).to be true
+      end
+
+      it 'properly manipulates the image with ImageMagick (MiniMagick::Image) commands' do
+        attr = valid_attributes
+        attr.delete(:width)
+        attr.delete(:height)
+        img = described_class.new attr
+
+        img.source.resize '123x'
+        expect(img.width).to eq 123
+        img.source.resize 'x321'
+        expect(img.height).to eq 321
+      end
     end
 
-    it 'raises an error if the Y position is not given' do
-      qrcode = described_class.new position: [50, nil]
-      expect {
-        qrcode.to_zpl
-      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
+    describe '#to_zpl' do
+      let(:tokens) { image.to_zpl.split(/(\^[A-Z]+|\,)/).reject{ |e| ['', ',', nil].include?(e) } }
+
+      it 'raises an error if the X position is not given' do
+        qrcode = described_class.new position: [nil, 50]
+        expect {
+          qrcode.to_zpl
+        }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the X value is not given")
+      end
+
+      it 'raises an error if the Y position is not given' do
+        qrcode = described_class.new position: [50, nil]
+        expect {
+          qrcode.to_zpl
+        }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the Y value is not given")
+      end
+
+      it 'raises an error if the path is not given' do
+        valid_attributes.delete :path
+
+        expect {
+          image.to_zpl
+        }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the path is invalid or not given")
+      end
+
+      it "contains the Graphics Field command '^GF'" do
+        expect(image.to_zpl).to match /\^GF/
+      end
+
+      it 'contains the X position' do
+        expect(tokens[1]).to eq '50'
+      end
+
+      it 'contains the Y position' do
+        expect(tokens[2]).to eq '50'
+      end
+
+      it 'contains the properly encoded image' do
+        expect(tokens[3..-1].join).to eq '^GFA1079107913:::::K078Q03J07FF8P038I01JFP078I03JF8O0FCI0KFCO0FC001KFEN01FE003LFN01FE003LF8M03FF007LFCM03FF8007LFCM07FF800MFCM0IFC00MFEM0IFC00MFEL01IFE01MFEL01IFE01MFEL03JF01NFL07JF8:01NFL0KFC:01MFEK01KFE00MFEK01LF00MFEK03LF00MFEK07LF8007LFCK07LF8007LFCK0MFC003LF8K0MFC003LFK01MFE001KFEK01NFI0KFCK03NFI07JF8K07NF8I01JFL04N08J07FFCK0FC::::::N01MFE:::::::::::::::::::::::::::::::::::^FS'
+      end
     end
-
-    it 'raises an error if the path is not given' do
-      valid_attributes.delete :path
-
-      expect {
-        image.to_zpl
-      }.to raise_error(Zebra::Zpl::Printable::MissingAttributeError, "Can't print if the path is invalid or not given")
-    end
-
-    it "contains the Graphics Field command '^GF'" do
-      expect(image.to_zpl).to match /\^GF/
-    end
-
-    it 'contains the X position' do
-      expect(tokens[1]).to eq '50'
-    end
-
-    it 'contains the Y position' do
-      expect(tokens[2]).to eq '50'
-    end
-
-    it 'contains the properly encoded image' do
-      expect(tokens[3..-1].join).to eq '^GFA1079107913:::::M0FR06L0IFQ07K03IFEP0FK07JFO01F8J01KF8N01F8J03KFCN03FCJ07KFEN03FCJ07LFN07FEJ0MF8M07HFJ0MF8M0IFI01MF8L01IF8I01MFCL01IF8I01MFCL03IFCI03MFCL03IFCI03MFCL07IFEI03MFEL0KF:I03MFEK01KF8:I03MFCK03KFCI01MFCK03KFEI01MFCK07KFEI01MFCK0MFJ0MF8K0MFJ0MF8J01MF8J07LFK01MF8J07KFEK03MFCJ03KFCK03MFEJ01KF8K07MFEK0KFL0OFK03IFEL08M01L0IF8L01F8::::::P03MFC:::::::::::::::::::::::::::::::::::^FS'
-    end
-
   end
 end
