@@ -80,6 +80,19 @@ describe Zebra::Zpl::Image do
         attr.delete(:width)
         attr.delete(:height)
         img = described_class.new attr
+        src = img.src
+        expect(src.respond_to?(:resize)).to be true
+        expect(src.respond_to?(:trim)).to be true
+        expect(src.respond_to?(:crop)).to be true
+        expect(src.respond_to?(:flatten)).to be true
+        expect(src.respond_to?(:rotate)).to be true
+      end
+
+      it 'properly manipulates the image with ImageMagick (MiniMagick::Image) commands' do
+        attr = valid_attributes
+        attr.delete(:width)
+        attr.delete(:height)
+        img = described_class.new attr
 
         img.source.resize '123x'
         expect(img.width).to eq 123
