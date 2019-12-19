@@ -1,6 +1,9 @@
 ### 1.1.1 (next)
 
 * Your contribution here.
+
+### 1.1.1 (12/19/2019)
+
 * [#58](https://github.com/bbulpett/zebra-zpl/pull/58): Add access to source `Img2Zpl::Image` object - [@mtking2](https://github.com/mtking2)
 
 ### 1.1.0 (11/04/2019)
