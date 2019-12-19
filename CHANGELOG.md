@@ -1,4 +1,4 @@
-### 1.1.1 (next)
+### 1.1.2 (next)
 
 * Your contribution here.
 
