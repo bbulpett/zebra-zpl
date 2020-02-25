@@ -56,7 +56,10 @@ describe Zebra::Zpl::Text do
   describe "#font_size=" do
     it "raises an error if the received font_size is invalid" do
       expect {
-        described_class.new.font_size = 6
+        described_class.new.font_size = -1
+      }.to raise_error(Zebra::Zpl::FontSize::InvalidFontSizeError)
+      expect {
+        described_class.new.font_size = 32001
       }.to raise_error(Zebra::Zpl::FontSize::InvalidFontSizeError)
     end
   end
