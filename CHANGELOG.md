@@ -1,6 +1,11 @@
-### 1.1.2 (next)
+### 1.1.3 (next)
 
 * Your contribution here.
+
+### 1.1.2 (02/25/2019)
+
+* [#63](https://github.com/bbulpett/zebra-zpl/pull/63): Un-restrict font size - [@mtking2](https://github.com/mtking2)
+* [#62](https://github.com/bbulpett/zebra-zpl/pull/62): Add print service option for print jobs (`lp`/`rlpr`) - [@LagTag](https://github.com/LagTag)
 
 ### 1.1.1 (12/19/2019)
 

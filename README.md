@@ -97,6 +97,18 @@ print_job.print label, ip
 
 This will persist the label contents to a tempfile (using Ruby's tempfile core library) and copy the file to the printer using either `rlpr -H <hostname/ip> -P <your-printer-name-on-windows> -o <path-to-the-temp-file>` (for Windows systems, see [section](#printing-directly-to-windows-lpd) below) or `lp -h <hostname/ip> -d <your-printer-name-on-cups> -o raw <path-to-the-tempfile>` (for Unix systems). All the tempfile creation/path resolution, as well as which command has to be used, are handled by the `PrintJob` class.
 
+##### Print Service
+
+You can specify what print service command you want to be used when calling the `print` method by setting the `:print_service` option parameter. If left unspecified, it will attempt to send the print job first via `rlpr` - if the `rlpr` command fails in anyway then it will fall back to the `lp` command.
+
+```ruby
+print_job.print label, ip, print_service: 'lp'  # attempt only via the lp command
+
+print_job.print label, ip, print_service: 'rlpr'  # attempt only via the rlpr command
+
+print_job.print label, ip  # attempt via rlpr first, fallback to lp
+```
+
 #### Printing directly to Windows LPD
 This gem also supports printing directly to shared printer on Windows using LPD.
 In order to print directly to a LPD on a Windows machine you need two things:
