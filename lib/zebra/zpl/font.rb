@@ -15,7 +15,7 @@ module Zebra
       SIZE_9 = 133 # 48pt
 
       def self.valid_font_size?(font_size)
-        [12, 17, 22, 28, 33, 44, 67, 100, 111, 133].include?(font_size.to_i)
+        (0..32000).include?(font_size.to_i)
       end
 
       def self.validate_font_size(font_size)
