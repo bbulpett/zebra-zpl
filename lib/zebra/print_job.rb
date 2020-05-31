@@ -22,9 +22,8 @@ module Zebra
     def raw_print(zpl, ip, print_service: "")
       @remote_ip = ip
       tempfile = Tempfile.new "zebra_label"
-      tempfile << zpl
+      tempfile.write zpl
       tempfile.close
-      @tempfile = tempfile
       send_to_printer(tempfile.path, print_service)
     end
 
