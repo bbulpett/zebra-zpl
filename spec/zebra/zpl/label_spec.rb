@@ -32,7 +32,7 @@ describe Zebra::Zpl::Label do
     end
 
     it "validates the printing speed" do
-      [-1, 8, "a"].each do |s|
+      [-1, 15, "a"].each do |s|
         expect {
           described_class.new print_speed: s
         }.to raise_error(Zebra::Zpl::Label::InvalidPrintSpeedError)
