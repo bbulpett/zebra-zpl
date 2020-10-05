@@ -17,7 +17,7 @@ module Zebra
       end
 
       def print_speed=(s)
-        raise InvalidPrintSpeedError unless (0..6).include?(s)
+        raise InvalidPrintSpeedError unless (0..14).include?(s)
         @print_speed = s
       end
 
