@@ -13,6 +13,7 @@ Zebra::Zpl offers a Ruby DSL to design and print labels using the ZPL programmin
     - [Printing Labels](#printing-the-labels)
   - [Elements](#available-elements)
     - [Text](#text)
+    - [Raw ZPL](#raw-zpl)
     - [Barcodes](#barcodes)
     - [QR Codes](#qr-codes)
     - [Data Matrix](#data-matrix)      
@@ -147,6 +148,26 @@ For the print modes, you can also use the constants:
 * `Zebra::Zpl::PrintMode::NORMAL`
 * `Zebra::Zpl::PrintMode::REVERSE`
 
+### Raw ZPL
+
+The `Zebra::Zpl::Raw` class allows you to supply a raw string of ZPL to include on a label. This can be useful for small images, sections of static ZPL that never change, or if you have previously generated ZPL.
+
+* `data`: The ZPL string to be printed.
+* `position`: An array with the coordinates to place the text, in dots.
+* `rotation`: The rotation for the text. More about the possible values below (see [Rotation](#elements-rotation) section).
+
+```ruby
+label = Zebra::Zpl::Label.new width: 600, length: 305, print_speed: 6
+
+zpl_string = "^GFA,1300,1300,13,,::::::O01IFE,N01KFE,N0MFC,M03NF,M0OFC,L03PF,L0QF8,K01QFE,K03RF,K07RF8,J01SFC,J03F9OFE7E,J07F01MFE03F,J07E007LF803F8,J0FE003KFE001FC,I01FEI0FC00FC001FE,I03FCI04M01FF,I07FCQ01FF,I07FCQ01FF8,I0FFCQ01FFC,I0FFEQ01FFC,001FFEQ01FFE,:003FFEQ03IF,003FFEQ01IF,007FFCR0IF,007FFCR0IF8,007FF8R07FF8,00IFS03FF8,00IFS03FFC,:00FFES01FFC,01FFES01FFC,01FFES01FFE,:01FFCS01FFE,:::::01FFES01FFE,::01FFES03FFE,01IFS03FFE,01IFS03FFC,01IF8R07FFC,00IF8R0IFC,00IFCR0IFC,00IFEQ01IFC,00JFQ03IF8,007IF8P07IF8,007IFCP0JF8,007JFO03JF,003F87FCN0KF,003F81FFM03JFE,001F80FFEK01KFE,001FC07FFCJ0LFC,I0FF03FF8J0LFC,I0FF03FF8J07KF8,I07F81FF8J07KF8,I03F807F8J07KF,I03FC004K07JFE,I01FCN07JFE,J0FEN07JFC,J07FN07JF8,J03F8M07JF,J01FCM07IFE,K0FFM07IFC,K07IF8J07IF8,K03IF8J07IF,L0IF8J07FFC,L07FF8J07FF8,L01FF8J07FE,M0FF8J07F8,M01F8J07E,N07K038,,::::::::::::::^FS"
+
+raw_zpl = Zebra::Zpl::Raw.new(
+  data:       zpl_string,
+  position:   [50, 50],
+)
+
+label << raw_zpl
+```
 
 ### Barcodes
 
