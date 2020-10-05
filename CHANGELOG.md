@@ -1,6 +1,6 @@
-### 1.1.3 (next)
+### 1.1.3 (10/05/2020)
 
-* Your contribution here.
+* [#70](https://github.com/bbulpett/zebra-zpl/pull/70): Update max print speed from 6 to 14 - [@eke-bb](https://github.com/eke-bb)
 
 ### 1.1.2 (02/25/2019)
 
