@@ -7,7 +7,7 @@ module Zebra
         end
       end
 
-      attr_reader :position, :x, :y, :margin
+      attr_reader :position, :x, :y, :margin, :id
       attr_accessor :data
 
       def initialize(options = {})
@@ -40,6 +40,10 @@ module Zebra
 
       def rotation
         @rotation || Rotation::NO_ROTATION
+      end
+
+      def id=(id)
+        @id = id || (rand*10000000).ceil
       end
 
       private
