@@ -184,7 +184,9 @@ You create barcode elements to print using instances of the `Zebra::Zpl::Barcode
 * `type`: The type os barcode to use. More on the available types below.
 * `narrow_bar_width`: The barcode's narrow bar width, in dots.
 * `wide_bar_width`: The barcode's wide bar width, in dots.
-* `print_human_readable_code`: Can be `true` or `false`, indicates if the human readable contents should be printed below the barcode.
+* `print_human_readable_code`: Can be `true` or `false`, indicates if the human readable contents should/should not be printed. Default: `false`.
+* `print_text_above`: Can be `true` or `false`, indicates if the human readable contents should be printed above/below the barcode. Default: `false`.
+* `mode`: Can be `N/U/A/D`. Mode value which is optional for `Code 128 Bar Code: CODE_128_AUTO`.
 
 The available barcode types are:
 
@@ -196,6 +198,10 @@ The available barcode types are:
 * `Zebra::Zpl::BarcodeType::CODE_AZTEC_PARAMS`
 * `Zebra::Zpl::BarcodeType::CODE_UPS_MAXICODE`
 * `Zebra::Zpl::BarcodeType::CODE_QR`
+* `Zebra::Zpl::BarcodeType::CODE_UPCA`
+* `Zebra::Zpl::BarcodeType::CODE_UPCE`
+* `Zebra::Zpl::BarcodeType::CODE_EAN8`
+* `Zebra::Zpl::BarcodeType::CODE_EAN13`
 
 ### QR Codes
 

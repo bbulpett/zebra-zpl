@@ -9,9 +9,9 @@ module Zebra
       class InvalidNarrowBarWidthError < StandardError; end
       class InvalidWideBarWidthError   < StandardError; end
 
-      attr_accessor :height
+      attr_accessor :height, :mode
       attr_reader :type, :ratio, :narrow_bar_width, :wide_bar_width
-      attr_writer :print_human_readable_code
+      attr_writer :print_human_readable_code, :print_text_above
 
       def width=(value)
         @width = value || 0
@@ -53,10 +53,54 @@ module Zebra
         @print_human_readable_code || false
       end
 
+      def print_text_above
+        @print_text_above || false
+      end
+
       def to_zpl
         check_attributes
-        human_readable = print_human_readable_code ? "Y" : "N"
-        "^FW#{rotation}^FO#{x},#{y}^BY#{width},#{ratio},#{height}^B#{type}#{rotation},,#{human_readable}^FD#{data}^FS"
+
+        barcode = case type
+        when BarcodeType::CODE_39
+          # Code 39 Bar Code: ^B3o,e,h,f,g
+          "^B3#{rotation},,,#{interpretation_line},#{interpretation_line_above}"
+        when BarcodeType::CODE_93
+          # Code 93 Bar Code: ^BAo,h,f,g,e
+          "^BA#{rotation},,#{interpretation_line},#{interpretation_line_above}"
+        when BarcodeType::CODE_128_AUTO
+          # Code 128 Bar Code: ^BCo,h,f,g,e,m
+          "^BC#{rotation},,#{interpretation_line},#{interpretation_line_above},,#{mode}"
+        when BarcodeType::CODABAR
+          # ANSI Codabar Bar Code: ^BKo,e,h,f,g,k,l
+          "^BK#{rotation},,,#{interpretation_line},#{interpretation_line_above}"
+        when BarcodeType::CODE_AZTEC
+          # Aztec Bar Code Parameters: ^B0a,b,c,d,e,f,g
+          "^B0#{rotation},6"
+        when BarcodeType::CODE_AZTEC_PARAMS
+          # Aztec Bar Code Parameters: ^BOa,b,c,d,e,f,g
+          "^BO#{rotation},6"
+        when BarcodeType::CODE_UPS_MAXICODE
+          # UPS MaxiCode Bar Code: ^BDm,n,t
+          "^BD"
+        when BarcodeType::CODE_QR
+          # QR Code Bar Code: ^BQa,b,c,d,e
+          "^BQ#{rotation}"
+        when BarcodeType::CODE_UPCA
+          # UPC-A Bar Code: ^BUo,h,f,g,e
+        when BarcodeType::CODE_UPCE
+          # UPC-E Bar Code: ^B9o,h,f,g,e
+          "^B9#{rotation},,#{interpretation_line},#{interpretation_line_above}"
+        when BarcodeType::CODE_EAN8
+          # EAN-8 Bar Code: ^B8o,h,f,g
+          "^B8#{rotation},,#{interpretation_line},#{interpretation_line_above}"
+        when BarcodeType::CODE_EAN13
+          # EAN-13 Bar Code: ^BEo,h,f,g
+          "^BE#{rotation},,#{interpretation_line},#{interpretation_line_above}"
+        else
+          raise BarcodeType::InvalidBarcodeTypeError
+        end
+
+        "^FW#{rotation}^FO#{x},#{y}^BY#{width},#{ratio},#{height}#{barcode}^FD#{data}^FS"
       end
 
       private
@@ -66,6 +110,14 @@ module Zebra
         raise MissingAttributeError.new("the barcode type to be used is not given") unless @type
         raise MissingAttributeError.new("the height to be used is not given") unless @height
         raise MissingAttributeError.new("the width to be used is not given") unless @width || @narrow_bar_width || @wide_bar_width
+      end
+
+      def interpretation_line
+        print_human_readable_code ? "Y" : "N"
+      end
+
+      def interpretation_line_above
+        print_text_above ? "Y" : "N"
       end
     end
   end
