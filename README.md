@@ -140,13 +140,8 @@ You create text elements to print using instances of the `Zebra::Zpl::Text` clas
 * `position`: An array with the coordinates to place the text, in dots.
 * `rotation`: The rotation for the text. More about the possible values below (see [Rotation](#elements-rotation) section).
 * `data`: The text to be printed.
-* `print_mode`: The print mode. Can be normal ("N") or reverse ("R").
 * `font_size`: The font size to use. You can use values between 1 and 5.
-
-For the print modes, you can also use the constants:
-
-* `Zebra::Zpl::PrintMode::NORMAL`
-* `Zebra::Zpl::PrintMode::REVERSE`
+* `reverse_print`: Allows a field to appear as white over black or black over white
 
 ### Raw ZPL
 

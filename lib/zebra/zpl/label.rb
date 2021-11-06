@@ -4,7 +4,6 @@ module Zebra
   module Zpl
     class Label
       class InvalidPrintSpeedError     < StandardError; end
-      class InvalidPrintDensityError   < StandardError; end
       class PrintSpeedNotInformedError < StandardError; end
 
       attr_writer :copies
