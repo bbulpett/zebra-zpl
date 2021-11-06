@@ -130,7 +130,7 @@ describe Zebra::Zpl::Text do
     end
 
     it "contains the properly duplicated attributes in correct order for bold text" do
-      expect(text_bold.to_zpl).to eq '^FWN^CF0,28^CI28^FO102,150^FB,4,,L,^FDfoobar^FS^FWN^CF0,28^CI28^FO100,152^FB,4,,L,^FDfoobar^FS'
+      expect(text_bold.to_zpl).to eq '^FWN^CF0,28^CI28^FO101,150^FB,4,,L,^FDfoobar^FS^FWN^CF0,28^CI28^FO100,151^FB,4,,L,^FDfoobar^FS'
     end
 
     # it "assumes 1 as the default horizontal multipler" do

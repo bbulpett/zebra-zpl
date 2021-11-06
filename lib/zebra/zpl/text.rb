@@ -86,8 +86,8 @@ module Zebra
       def to_zpl
         check_attributes
         if !bold.nil?
-          "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x+2},#{y}^FB#{width},#{max_lines},#{line_spacing},#{justification},#{hanging_indent}^FD#{data}^FS" +
-          "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x},#{y+2}^FB#{width},#{max_lines},#{line_spacing},#{justification},#{hanging_indent}^FD#{data}^FS"
+          "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x+1},#{y}^FB#{width},#{max_lines},#{line_spacing},#{justification},#{hanging_indent}^FD#{data}^FS" +
+          "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x},#{y+1}^FB#{width},#{max_lines},#{line_spacing},#{justification},#{hanging_indent}^FD#{data}^FS"
         else
           "^FW#{rotation}^CF#{font_type},#{font_size}^CI28^FO#{x},#{y}^FB#{width},#{max_lines},#{line_spacing},#{justification},#{hanging_indent}^FD#{data}^FS"
         end

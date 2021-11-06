@@ -142,6 +142,7 @@ You create text elements to print using instances of the `Zebra::Zpl::Text` clas
 * `data`: The text to be printed.
 * `print_mode`: The print mode. Can be normal ("N") or reverse ("R").
 * `font_size`: The font size to use. You can use values between 1 and 5.
+* `bold`: The font-weight will be increased via text duplication printing.
 
 For the print modes, you can also use the constants:
 
