@@ -50,6 +50,7 @@ You create new labels with an instance of the `Zebra::Zpl::Label` class. It acce
 * `width`: The label's width, in dots.
 * `length`: The label's length, is dots.
 * `print_speed`: The print speed to be used. You can use values between 0 and 6. This option is required.
+* `label_shift`: The label's shift is used to shift all field positions to the left. This option defaults to 10.
 
 With a label, you can start adding elements to it:
 
