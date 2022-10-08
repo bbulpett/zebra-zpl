@@ -1,4 +1,4 @@
-### 1.1.4 (next)
+### 1.1.4 (10/08/2022)
 
 * [#81](https://github.com/bbulpett/zebra-zpl/pull/81): Added D font type. Added `label_shift` configurable attribute - [@vkhalzov](https://github.com/vkhalzov)
 * [#80](https://github.com/bbulpett/zebra-zpl/pull/80): Improvements to barcode usage - [@DmytroVasin](https://github.com/DmytroVasin)
