@@ -142,6 +142,7 @@ You create text elements to print using instances of the `Zebra::Zpl::Text` clas
 * `rotation`: The rotation for the text. More about the possible values below (see [Rotation](#elements-rotation) section).
 * `data`: The text to be printed.
 * `font_size`: The font size to use. You can use values between 1 and 5.
+* `bold`: The font-weight will be increased via text duplication printing.
 * `reverse_print`: Allows a field to appear as white over black or black over white
 
 ### Raw ZPL
