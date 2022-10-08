@@ -1,7 +1,10 @@
 ### 1.1.4 (next)
 
-* Added D font type - [@vkhalzov](https://github.com/vkhalzov)
-* Added `label_shift` configurable attribute - [@vkhalzov](https://github.com/vkhalzov)
+* [#81](https://github.com/bbulpett/zebra-zpl/pull/81): Added D font type. Added `label_shift` configurable attribute - [@vkhalzov](https://github.com/vkhalzov)
+* [#80](https://github.com/bbulpett/zebra-zpl/pull/80): Improvements to barcode usage - [@DmytroVasin](https://github.com/DmytroVasin)
+* [#79](https://github.com/bbulpett/zebra-zpl/pull/79): Change appearance of bold text setting - [@DmytroVasin](https://github.com/DmytroVasin)
+* [#78](https://github.com/bbulpett/zebra-zpl/pull/78): Fix of a test in image node - [@DmytroVasin](https://github.com/DmytroVasin)
+* [#77](https://github.com/bbulpett/zebra-zpl/pull/77): Add `reverse_print` setting for `Zpl::Text` node. Fix mistake with redefining of the default font. Removed unused methods - [@DmytroVasin](https://github.com/DmytroVasin)
 
 ### 1.1.3 (10/05/2020)
 
