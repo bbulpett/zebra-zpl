@@ -1,6 +1,7 @@
 ### 1.1.4 (next)
 
-* Your contribution here.
+* Added D font type - [@vkhalzov](https://github.com/vkhalzov)
+* Added `label_shift` configurable attribute - [@vkhalzov](https://github.com/vkhalzov)
 
 ### 1.1.3 (10/05/2020)
 

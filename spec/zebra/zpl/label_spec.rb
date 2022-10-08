@@ -6,29 +6,13 @@ describe Zebra::Zpl::Label do
   subject(:label) { described_class.new print_speed: 2 }
 
   describe "#new" do
-    it "sets the label width" do
-      label = described_class.new width: 300
-      expect(label.width).to eq 300
+    it "sets default values" do
+      expect(described_class.new).to have_attributes({ label_shift: 10, copies: 1 })
     end
 
-    it "sets the label length" do
-      label = described_class.new length: 400
-      expect(label.length).to eq 400
-    end
-
-    it "sets the printing speed" do
-      label = described_class.new print_speed: 2
-      expect(label.print_speed).to eq 2
-    end
-
-    it "sets the number of copies" do
-      label = described_class.new copies: 4
-      expect(label.copies).to eq 4
-    end
-
-    it "the number of copies defaults to 1" do
-      label = described_class.new
-      expect(label.copies).to eq 1
+    it "sets attributes" do
+      attributes = { width: 300, length: 400, print_speed: 2, copies: 4, label_shift: 15 }
+      expect(described_class.new(attributes)).to have_attributes(attributes)
     end
 
     it "validates the printing speed" do

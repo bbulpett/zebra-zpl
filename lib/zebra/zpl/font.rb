@@ -30,13 +30,14 @@ module Zebra
       TYPE_CD = "CD" # 6pt
       TYPE_A  = "A" # 6pt
       TYPE_B  = "B" # 6pt
+      TYPE_D  = "D" # 6pt
       TYPE_E  = "E" # 6pt
       TYPE_F  = "F" # 6pt
       TYPE_G  = "G" # 6pt
       TYPE_H  = "H" # 6pt
 
       def self.valid_font_type?(font_type)
-        ["0", "CD", "A", "B", "E", "F", "G", "H"].include?(font_type)
+        ["0", "CD", "A", "B", "D", "E", "F", "G", "H"].include?(font_type)
       end
 
       def self.validate_font_type(font_type)
