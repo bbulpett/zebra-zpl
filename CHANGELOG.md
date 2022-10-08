@@ -1,3 +1,7 @@
+### 1.1.5 (next)
+
+* Your contribution here.
+
 ### 1.1.4 (10/08/2022)
 
 * [#81](https://github.com/bbulpett/zebra-zpl/pull/81): Added D font type. Added `label_shift` configurable attribute - [@vkhalzov](https://github.com/vkhalzov)
