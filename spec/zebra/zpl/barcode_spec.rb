@@ -56,6 +56,16 @@ describe Zebra::Zpl::Barcode do
     expect(barcode.print_human_readable_code).to eq true
   end
 
+  it "can be initialized informing if the human readable code should be printed above" do
+    barcode = described_class.new print_text_above: true
+    expect(barcode.print_text_above).to eq true
+  end
+
+  it "can be initialized with the barcode mode" do
+    barcode = described_class.new mode: 'U'
+    expect(barcode.mode).to eq 'U'
+  end
+
   describe "#rotation=" do
     it "raises an error if the received rotation is invalid" do
       expect {
@@ -91,6 +101,12 @@ describe Zebra::Zpl::Barcode do
   describe "#print_human_readable_code" do
     it "defaults to false" do
       expect(described_class.new.print_human_readable_code).to eq false
+    end
+  end
+
+  describe "#print_text_above" do
+    it "defaults to false" do
+      expect(described_class.new.print_text_above).to eq false
     end
   end
 
@@ -196,8 +212,59 @@ describe Zebra::Zpl::Barcode do
       expect(tokens[9]).to eq 'N'
     end
 
+    it "contains the correct indication when the human readable code should be printed above or below" do
+      valid_attributes.merge! print_text_above: true
+      expect(tokens[10]).to eq 'Y'
+    end
+
+    it "contains the correct indication when the human readable code should not be printed above or below" do
+      valid_attributes.merge! print_text_above: false
+      expect(tokens[10]).to eq 'N'
+    end
+
+    it "contains the correct indication of a mode in barcode" do
+      valid_attributes.merge! mode: 'U'
+      expect(tokens[11]).to eq 'U'
+    end
+
     it "contains the data to be printed in the barcode" do
-      expect(tokens[11]).to eq 'foobar'
+      expect(tokens[12]).to eq 'foobar'
+    end
+  end
+
+  describe "#to_zpl with CODE_39" do
+    let(:valid_attributes) { {
+      position:         [100, 150],
+      type:             Zebra::Zpl::BarcodeType::CODE_39,
+      height:           20,
+      width:            5,
+      narrow_bar_width: 3,
+      wide_bar_width:   6,
+      print_human_readable_code: true,
+      print_text_above: true,
+      data:             "foobar"
+    } }
+    let(:barcode) { described_class.new valid_attributes }
+
+    it "contains the barcode type" do
+      expect(barcode.to_zpl).to end_with "^B#{Zebra::Zpl::BarcodeType::CODE_39}N,,,Y,Y^FDfoobar^FS"
+    end
+  end
+
+  describe "#to_zpl with CODE_UPS_MAXICODE" do
+    let(:valid_attributes) { {
+      position:         [100, 150],
+      type:             Zebra::Zpl::BarcodeType::CODE_UPS_MAXICODE,
+      height:           20,
+      width:            5,
+      narrow_bar_width: 3,
+      wide_bar_width:   6,
+      data:             "foobar"
+    } }
+    let(:barcode) { described_class.new valid_attributes }
+
+    it "contains the barcode type" do
+      expect(barcode.to_zpl).to end_with "^B#{Zebra::Zpl::BarcodeType::CODE_UPS_MAXICODE}^FDfoobar^FS"
     end
   end
 end

@@ -61,19 +61,21 @@ module Zebra
       def to_zpl
         check_attributes
         graphic = case graphic_type
-        when "B"
-          "B#{graphic_width},#{graphic_height},#{line_thickness},#{color},#{rounding_degree}"
-        when "C"
-          "C#{graphic_width},#{line_thickness},#{color}"
-        when "D"
-          "D#{graphic_width},#{graphic_height},#{line_thickness},#{color},#{orientation}"
-        when "E"
-          "E#{graphic_width},#{graphic_height},#{line_thickness},#{color}"
-        when "S"
+        when BOX
+          "^GB#{graphic_width},#{graphic_height},#{line_thickness},#{color},#{rounding_degree}"
+        when CIRCLE
+          "^GC#{graphic_width},#{line_thickness},#{color}"
+        when DIAGONAL
+          "^GD#{graphic_width},#{graphic_height},#{line_thickness},#{color},#{orientation}"
+        when ELLIPSE
+          "^GE#{graphic_width},#{graphic_height},#{line_thickness},#{color}"
+        when SYMBOL
           sym = !symbol_type.nil? ? "^FD#{symbol_type}" : ''
-          "S,#{graphic_height},#{graphic_width}#{sym}"
+          "^GS,#{graphic_height},#{graphic_width}#{sym}"
+        else
+          raise InvalidGraphicType
         end
-        "^FW#{rotation}^FO#{x},#{y}^G#{graphic}^FS"
+        "^FW#{rotation}^FO#{x},#{y}#{graphic}^FS"
       end
 
       private
