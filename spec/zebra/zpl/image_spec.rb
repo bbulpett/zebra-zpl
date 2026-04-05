@@ -75,17 +75,12 @@ describe Zebra::Zpl::Image do
         expect(image.source.class).to eq Img2Zpl::Image
       end
 
-      it 'responds to ImageMagick (MiniMagick::Image) commands' do
+      it 'is a MiniMagick::Image that supports ImageMagick commands' do
         attr = valid_attributes
         attr.delete(:width)
         attr.delete(:height)
         img = described_class.new attr
-        src = img.src
-        expect(src.respond_to?(:resize)).to be true
-        expect(src.respond_to?(:trim)).to be true
-        expect(src.respond_to?(:crop)).to be true
-        expect(src.respond_to?(:flatten)).to be true
-        expect(src.respond_to?(:rotate)).to be true
+        expect(img.src).to be_a MiniMagick::Image
       end
 
       it 'properly manipulates the image with ImageMagick (MiniMagick::Image) commands' do
@@ -139,7 +134,8 @@ describe Zebra::Zpl::Image do
       end
 
       it 'contains the properly encoded image' do
-        expect(tokens[3..-1].join).to eq '^GFA1079107913:::::K07CQ03J07FF8P038I01IFEP078I03JF8O0FCI0KFCO0FC001KFEN01FE001LFN01FE003LF8M03FF007LFCM03FF8007LFCM07FF800MFCM0IFC00MFEM0IFC00MFEL01IFE01MFEL01IFE01MFEL03JF01NFL07JF8:01NFL0KFC:01MFEK01KFE00MFEK01LF00MFEK03LF00MFEK07LF8007LFCK07LF8007LFCK0MFC003LF8K0MFC003LFK01MFE001KFEK01NFI0KFCK03NFI07JF8K07NF8I01JFL04J07FFCK0FC::::::N01MFE:::::::::::::::::::::::::::::::::::^FS'
+        binding.pry
+        expect(tokens[3..-1].join).to eq '^GFA1079107913:::::K078Q03J07FF8P038I01JFP078I03JF8O0FCI0KFCO0FC001KFEN01FE003LFN01FE003LF8M03FF007LFCM03FF8007LFCM07FF800MFCM0IFC00MFEM0IFC00MFEL01IFE01MFEL01IFE01MFEL03JF01NFL07JF8:01NFL0KFC:01MFEK01KFE00MFEK01LF00MFEK03LF00MFEK07LF8007LFCK07LF8007LFCK0MFC003LF8K0MFC003LFK01MFE001KFEK01NFI0KFCK03NFI07JF8K07NF8I01JFL04N08J07FFCK0FC::::::N01MFE:::::::::::::::::::::::::::::::::::^FS'
       end
     end
   end

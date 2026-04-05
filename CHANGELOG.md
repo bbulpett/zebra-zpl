@@ -1,8 +1,8 @@
-### 1.1.5 (next)
+### 1.1.5 (2026/04/05)
 
-* Your contribution here.
+* [#86](https://github.com/bbulpett/zebra-zpl/pull/86): Reduce gem size by excluding test files - [@yuri-zubov](https://github.com/yuri-zubov)
 
-### 1.1.4 (10/08/2022)
+### 1.1.4 (2022/10/08)
 
 * [#81](https://github.com/bbulpett/zebra-zpl/pull/81): Added D font type. Added `label_shift` configurable attribute - [@vkhalzov](https://github.com/vkhalzov)
 * [#80](https://github.com/bbulpett/zebra-zpl/pull/80): Improvements to barcode usage - [@DmytroVasin](https://github.com/DmytroVasin)
@@ -10,20 +10,20 @@
 * [#78](https://github.com/bbulpett/zebra-zpl/pull/78): Fix of a test in image node - [@DmytroVasin](https://github.com/DmytroVasin)
 * [#77](https://github.com/bbulpett/zebra-zpl/pull/77): Add `reverse_print` setting for `Zpl::Text` node. Fix mistake with redefining of the default font. Removed unused methods - [@DmytroVasin](https://github.com/DmytroVasin)
 
-### 1.1.3 (10/05/2020)
+### 1.1.3 (2020/10/05)
 
 * [#70](https://github.com/bbulpett/zebra-zpl/pull/70): Update max print speed from 6 to 14 - [@eke-bb](https://github.com/eke-bb)
 
-### 1.1.2 (02/25/2019)
+### 1.1.2 (2019/02/25)
 
 * [#63](https://github.com/bbulpett/zebra-zpl/pull/63): Un-restrict font size - [@mtking2](https://github.com/mtking2)
 * [#62](https://github.com/bbulpett/zebra-zpl/pull/62): Add print service option for print jobs (`lp`/`rlpr`) - [@LagTag](https://github.com/LagTag)
 
-### 1.1.1 (12/19/2019)
+### 1.1.1 (2019/12/19)
 
 * [#58](https://github.com/bbulpett/zebra-zpl/pull/58): Add access to source `Img2Zpl::Image` object - [@mtking2](https://github.com/mtking2)
 
-### 1.1.0 (11/04/2019)
+### 1.1.0 (2019/11/04)
 
 * [#54](https://github.com/bbulpett/zebra-zpl/pull/54): Fix height bug with ^B commands - [@mtking2](https://github.com/mtking2)
 * [#53](https://github.com/bbulpett/zebra-zpl/pull/53): Added support for symbol types, fixed other bugs with the `Graphic` class, updated specs - [@mtking2](https://github.com/mtking2)

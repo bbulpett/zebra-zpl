@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'zebra-zpl'
   spec.version       = Zebra::Zpl::VERSION
   spec.authors       = ['Barnabas Bulpett','Michael King','Logan Green']
-  spec.email         = ['barnabasbulpett@gmail.com','mtking1123@gmail.com','loganagreen95@gmail.com']
+  spec.email         = ['barnabasbulpett@gmail.com','m.king@fastmail.com','loganagreen95@gmail.com']
   spec.description   = %q{Print labels using ZPL2 and Ruby}
   spec.summary       = %q{Simple DSL to create labels and send them to a Zebra printer using Ruby, ZPL2 and CUPS}
 
